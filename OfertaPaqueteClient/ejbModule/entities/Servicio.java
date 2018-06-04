@@ -1,7 +1,19 @@
 package entities;
 
-public class Servicio {
+import java.io.Serializable;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="servicios")
+public class Servicio implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String descripcion;
 	

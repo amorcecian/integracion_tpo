@@ -1,13 +1,26 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Agencia {
+import javax.persistence.*;
 
+@Entity
+@Table(name="agencias")
+public class Agencia implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String direccion;
 	private String estado;
+	@OneToMany
+	@JoinColumn(name="agencia")
 	private List<Paquete> paquetes;
 	
 	public Agencia(int id, String nombre, String direccion, String estado, List<Paquete> paquetes) {

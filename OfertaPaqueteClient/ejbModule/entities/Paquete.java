@@ -1,18 +1,34 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Paquete {
+import javax.persistence.*;
+
+@Entity
+@Table(name="paquetes")
+public class Paquete implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
+	@ManyToOne
+	@JoinColumn(name="destino")
 	private Destino destino;
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private String estado;
 	private int cupo;
 	private float precioPersona;
+	@ManyToMany(cascade={CascadeType.MERGE})
+	@JoinTable(name="paquete_servicio",joinColumns=@JoinColumn(name="id_paquete"),
+	inverseJoinColumns=@JoinColumn(name="id_servicio"))
 	private List<Servicio> servicios;
 	private String descripcion;
 	private String foto;
