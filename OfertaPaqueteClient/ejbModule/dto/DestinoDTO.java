@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class DestinoDTO implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private int id;
 	private String nombre;
 	private double latitud;
 	private double longitud;
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -36,8 +36,6 @@ public class DestinoDTO implements Serializable {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
-	
-	
 	
 
 }

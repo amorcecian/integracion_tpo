@@ -4,15 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
+
+import entities.Destino;
+import entities.Servicio;
+
 public class PaqueteDTO implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String nombre;
-	private DestinoDTO destino;
+	private Destino destino;
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private String estado;
@@ -23,8 +26,6 @@ public class PaqueteDTO implements Serializable {
 	private String foto;
 	private int cantPersonas;
 	private String politicasDeCancelacion;
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -37,10 +38,10 @@ public class PaqueteDTO implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public DestinoDTO getDestino() {
+	public Destino getDestino() {
 		return destino;
 	}
-	public void setDestino(DestinoDTO destino) {
+	public void setDestino(Destino destino) {
 		this.destino = destino;
 	}
 	public Date getFechaIngreso() {
@@ -103,6 +104,7 @@ public class PaqueteDTO implements Serializable {
 	public void setPoliticasDeCancelacion(String politicasDeCancelacion) {
 		this.politicasDeCancelacion = politicasDeCancelacion;
 	}
+	
 	
 
 }

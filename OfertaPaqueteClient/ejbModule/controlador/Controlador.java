@@ -1,9 +1,12 @@
 package controlador;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import dto.AgenciaDTO;
-import sessions.ControladorAgenciaRemote;
+import entities.Agencia;
+import sessions.ControladorAgencia;
 
 /**
  * Session Bean implementation class Controlador
@@ -12,11 +15,15 @@ import sessions.ControladorAgenciaRemote;
 public class Controlador implements ControladorRemote {
 	
 	@EJB
-	ControladorAgenciaRemote conAgencia;
-
-	public void altaAgencia(AgenciaDTO agencia) {		
-		conAgencia.altaAgencia(agencia.getNombre(),agencia.getDireccion());		
+	ControladorAgencia conAgencias;
+	
+	public void altaAgencia(String nombre, String direccion) {
+		
+		conAgencias.altaAgencia(nombre, direccion);	
+		
+		
 	}
+
 
 
 }

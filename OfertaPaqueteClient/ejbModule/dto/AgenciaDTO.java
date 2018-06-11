@@ -3,21 +3,18 @@ package dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class AgenciaDTO implements Serializable{
+public class AgenciaDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
 	private Integer Id;
 	private String Nombre;
 	private String Direccion;
 	private String Estado;
-	private List<PaqueteDTO> Ofertas;
-	
-	
+	private List<PaqueteDTO> paquetes;
 	public Integer getId() {
 		return Id;
 	}
@@ -42,13 +39,11 @@ public class AgenciaDTO implements Serializable{
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
-	public List<PaqueteDTO> getOfertas() {
-		return Ofertas;
+	public List<PaqueteDTO> getPaquetes() {
+		return paquetes;
 	}
-	public void setOfertas(List<PaqueteDTO> ofertas) {
-		Ofertas = ofertas;
+	public void setPaquetes(List<PaqueteDTO> paquetes) {
+		this.paquetes = paquetes;
 	}
-
-	
 
 }

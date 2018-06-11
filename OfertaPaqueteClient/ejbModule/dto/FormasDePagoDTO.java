@@ -2,13 +2,14 @@ package dto;
 
 import java.io.Serializable;
 
-public class ServicioDTO implements Serializable {
+public class FormasDePagoDTO implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private int id;
 	private String descripcion;
-	
 	
 	public int getId() {
 		return id;
@@ -22,6 +23,5 @@ public class ServicioDTO implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
 
 }
