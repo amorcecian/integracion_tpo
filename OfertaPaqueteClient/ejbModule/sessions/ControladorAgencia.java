@@ -14,22 +14,24 @@ import entities.Agencia;
 @Stateless
 @LocalBean
 public class ControladorAgencia implements ControladorAgenciaRemote, ControladorAgenciaLocal {
-
-
+	
 	@PersistenceContext(unitName="MyPU")
 	   private EntityManager em;
 	
-	
+
+    /**
+     * Default constructor. 
+     */
     public ControladorAgencia() {
         // TODO Auto-generated constructor stub
     }
     
     public void altaAgencia(String nombre, String direccion) {
     	if(!validarAgencia(nombre,direccion)) {
-    		System.out.println("La agencia no existe");
+
     		Agencia nAgencia = new Agencia (nombre,direccion,"Pendiente");
     		em.persist(nAgencia);
-    		System.out.println("Cree la agencia");
+
     		
     	}else {
     		System.out.println("La agencia existe");
@@ -39,11 +41,14 @@ public class ControladorAgencia implements ControladorAgenciaRemote, Controlador
     
     private boolean validarAgencia(String nombre, String direccion) {
 		try {
-			Query q = em.createQuery("SELECT a FROM Agencia a WHERE a.nombre LIKE :nom AND a.direccion LIKE dire")
+			Query q = em.createQuery("SELECT COUNT(a.nombre) FROM Agencia a WHERE a.nombre LIKE :nom AND a.direccion LIKE :dire ")
 					.setParameter("nom", nombre)
 					.setParameter("dire", direccion);
-			Agencia ap = (Agencia) q.getSingleResult();
-			if(ap != null ) {
+			
+			Long x = (Long) q.getSingleResult();
+			
+			
+			if(x >= 1 ) {				
 				return true;
 			}else {
 				return false;
@@ -54,16 +59,5 @@ public class ControladorAgencia implements ControladorAgenciaRemote, Controlador
 		}
 		return false;
 	}
-    
-    /*
-     * public List findWithName(String name) {
-    return em.createQuery(
-        "SELECT c FROM Customer c WHERE c.name LIKE :custName")
-        .setParameter("custName", name)
-        .getResultList();
-}
-     */
-
-
 
 }
