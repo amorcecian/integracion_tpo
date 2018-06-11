@@ -31,6 +31,15 @@ public class Agencia implements Serializable {
 		this.estado = estado;
 		this.paquetes = paquetes;
 	}
+	
+	public Agencia(String nombre, String direccion, String estado) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.estado = estado;
+		this.paquetes = paquetes;
+	}
 
 	public int getId() {
 		return id;
