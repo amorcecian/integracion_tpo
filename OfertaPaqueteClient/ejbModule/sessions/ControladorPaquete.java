@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @LocalBean
-public class ControladorPaquete implements ControladorPaqueteRemote, ControladorPaqueteLocal {
+public class ControladorPaquete implements ControladorPaqueteRemote {
 
     /**
      * Default constructor. 

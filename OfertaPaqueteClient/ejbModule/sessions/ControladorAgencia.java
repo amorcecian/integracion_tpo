@@ -13,7 +13,7 @@ import entities.Agencia;
  */
 @Stateless
 @LocalBean
-public class ControladorAgencia implements ControladorAgenciaRemote, ControladorAgenciaLocal {
+public class ControladorAgencia implements ControladorAgenciaRemote {
 	
 	@PersistenceContext(unitName="MyPU")
 	   private EntityManager em;
