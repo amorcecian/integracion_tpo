@@ -4,6 +4,8 @@ import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
+import controlador.ControladorRemote;
 import sessions.ControladorAgenciaRemote;
 
 
@@ -11,7 +13,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
-		ControladorAgenciaRemote cAgencia;  
+		ControladorRemote cRemote;  
 		
 	    final Hashtable jndiProperties = new Hashtable();	
 	    
@@ -21,12 +23,12 @@ public class Test {
 	    
 	    final Context context = new InitialContext(jndiProperties);
 		
-	    cAgencia = (ControladorAgenciaRemote) context	    		 
-	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorAgencia!sessions.ControladorAgenciaRemote");     
+	    cRemote = (ControladorRemote) context	    		 
+	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//Controlador!controlador.ControladorRemote");     
 	          
-	    cAgencia.altaAgencia("Pepe Travel","Av. Libertador 948");
+	    cRemote.altaAgencia("Pepe Travel","Av. Libertador 948");
 	    
-	    cAgencia.altaAgencia("Pepe Travel","Av. Libertador 948");
+	    cRemote.altaAgencia("Pepe Travel","Av. Libertador 948");
 	    
 	     
 	}

@@ -35,8 +35,7 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
 
-    		//Falta cargar agencia en el backoffice
-    		
+    		//sendToBackOfficeSolicitud(nAgencia);
     		
     	}else {
     		System.out.println("La agencia existe");
