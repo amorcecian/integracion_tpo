@@ -27,7 +27,10 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     public void altaAgencia(String nombre, String direccion) {
     	if(!validarAgencia(nombre,direccion)) {
     		System.out.println("La agencia no existe");
-    		Agencia nAgencia = new Agencia (nombre,direccion,"Pendiente");
+    		Agencia nAgencia = new Agencia();
+    		nAgencia.setNombre(nombre);
+    		nAgencia.setDireccion(direccion);
+    		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
     		System.out.println("Cree la agencia");
     		
