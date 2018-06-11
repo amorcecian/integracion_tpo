@@ -29,9 +29,14 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     public void altaAgencia(String nombre, String direccion) {
     	if(!validarAgencia(nombre,direccion)) {
 
-    		Agencia nAgencia = new Agencia (nombre,direccion,"Pendiente");
+    		Agencia nAgencia = new Agencia();
+    		nAgencia.setNombre(nombre);
+    		nAgencia.setDireccion(direccion);
+    		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
 
+    		//Falta cargar agencia en el backoffice
+    		
     		
     	}else {
     		System.out.println("La agencia existe");
@@ -43,11 +48,8 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 		try {
 			Query q = em.createQuery("SELECT COUNT(a.nombre) FROM Agencia a WHERE a.nombre LIKE :nom AND a.direccion LIKE :dire ")
 					.setParameter("nom", nombre)
-					.setParameter("dire", direccion);
-			
-			Long x = (Long) q.getSingleResult();
-			
-			
+					.setParameter("dire", direccion);			
+			Long x = (Long) q.getSingleResult();			
 			if(x >= 1 ) {				
 				return true;
 			}else {
