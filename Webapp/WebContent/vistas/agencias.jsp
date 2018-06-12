@@ -32,7 +32,7 @@
               <a class="nav-link" href="agencias.jsp">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Paquetes</a>
+              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>
@@ -83,10 +83,9 @@
     
         <!-- Page Content -->
     <div class="container">
-	<div>
-      <h1 class="my-4">Agencias</h1>
-      <a href="#" class="btn btn-secondary btn-lg disabled" role="button" aria-disabled="true">Nueva Agencia</a>
-    </div>
+	
+      <h1 class="my-4">Agencias</h1>    
+
 
       <!-- Marketing Icons Section -->
       <div class="row">
@@ -120,12 +119,14 @@
 		      <td>@twitter</td>
 		    </tr>
 		  </tbody>
-		</table>
-      
-        
-        
+		</table>        
       </div>
       <!-- /.row -->
+      
+   		<div align="right">
+			<a href="index.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Volver</a>
+	    	<a href="altaAgencia.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Nueva Agencia</a>
+	    </div>
 
 
 

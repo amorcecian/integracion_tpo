@@ -1,10 +1,12 @@
 package sessions;
 
+import java.io.IOException;
+
 import javax.ejb.Remote;
 
 @Remote
 public interface ControladorAgenciaRemote {
 	
-	public void altaAgencia(String nombre, String direccion);
+	public int altaAgencia(String nombre, String direccion);
 
 }

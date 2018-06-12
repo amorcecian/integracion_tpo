@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.google.gson.Gson;
+
+import dto.AgenciaDTO;
 import entities.Agencia;
 
 /**
@@ -26,7 +29,31 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
         // TODO Auto-generated constructor stub
     }
     
-    public void altaAgencia(String nombre, String direccion) {
+    //Test
+    /*
+    public int altaAgencia(AgenciaDTO a) {
+    	if(!validarAgencia(a.getNombre(),a.getDireccion())) {
+
+    		Agencia nAgencia = new Agencia();
+    		nAgencia.setNombre(a.getNombre());
+    		nAgencia.setDireccion(a.getDireccion());
+    		nAgencia.setEstado("Pendiente");
+    		em.persist(nAgencia);
+    		return nAgencia.getId();
+
+    		//sendToBackOfficeSolicitud(nAgencia);
+    		
+    	}else {    		
+    		System.out.println("La agencia existe");
+    		return 0;
+    	}
+    	
+    }
+    */
+    
+    //Fin Test
+    
+    public int altaAgencia(String nombre, String direccion)  {
     	if(!validarAgencia(nombre,direccion)) {
 
     		Agencia nAgencia = new Agencia();
@@ -35,10 +62,18 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
 
+    		
+     		Gson gson = new Gson();
+     		
+     		System.out.println(gson.toJson(nAgencia));
+     		
     		//sendToBackOfficeSolicitud(nAgencia);
     		
-    	}else {
+     		
+    		return nAgencia.getId();
+    	}else {    		
     		System.out.println("La agencia existe");
+    		return 0;
     	}
     	
     }
@@ -60,5 +95,18 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 		}
 		return false;
 	}
+    
+    
+    public Agencia recuperarAgencia(int id) {
+    	return em.find(Agencia.class, id);
+    	
+    }
+    
+    
+    public void actualizarAgencia(Agencia a) {
+    	em.merge(a);
+    }
+
+
 
 }

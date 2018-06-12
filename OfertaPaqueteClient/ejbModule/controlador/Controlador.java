@@ -19,8 +19,11 @@ public class Controlador implements ControladorRemote {
 	
 	public void altaAgencia(String nombre, String direccion) {
 		
-		conAgencias.altaAgencia(nombre, direccion);	
+		if(conAgencias.altaAgencia(nombre, direccion)!=0) {
+			System.out.println("Agencia insertada correctamente");
+		}
 		
+	
 		
 	}
 

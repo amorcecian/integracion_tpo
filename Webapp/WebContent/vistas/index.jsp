@@ -32,7 +32,7 @@
               <a class="nav-link" href="agencias.jsp">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Paquetes</a>
+              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>
@@ -89,34 +89,34 @@
       <div class="row">
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
+            <h4 class="card-header">Paquete 1</h4>
             <div class="card-body">
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
+              <a href="#" class="btn btn-primary">Ver detalle</a>
             </div>
           </div>
         </div>
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
+            <h4 class="card-header">Paquete 2</h4>
             <div class="card-body">
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
+              <a href="#" class="btn btn-primary">Ver detalle</a>
             </div>
           </div>
         </div>
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
+            <h4 class="card-header">Paquete 3</h4>
             <div class="card-body">
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
+              <a href="#" class="btn btn-primary">Ver detalle</a>
             </div>
           </div>
         </div>
@@ -130,51 +130,6 @@
 
     </div>
     <!-- /.container -->
-    
-        <!-- Page Content -->
-    <div class="container">
-
-      <h1 class="my-4">Agencias</h1>
-
-      <!-- Marketing Icons Section -->
-      <div class="row">
-      
-	      <table class="table table-striped">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Nombre</th>
-		      <th scope="col">Dirección</th>
-		      <th scope="col">Estado</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		    </tr>
-		  </tbody>
-		</table>
-      
-        
-        
-      </div>
-      <!-- /.row -->
-
 
 
 
