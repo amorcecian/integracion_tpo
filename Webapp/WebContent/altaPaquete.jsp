@@ -11,10 +11,10 @@
     <title>tuvago - Oferta Paquetes</title>
 
     <!-- Bootstrap core CSS -->
-	<link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 	
     <!-- Custom styles for this template -->
-	<link href="../css/modern-business.css" rel="stylesheet" type="text/css"/>
+	<link href="css/modern-business.css" rel="stylesheet" type="text/css"/>
   </head>
 
   <body>
@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="agencias.jsp">Agencias</a>
+              <a class="nav-link" href="Controlador?action=ListarAgencias">Agencias</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
@@ -48,21 +48,21 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('../images/londres.jpg')">
+          <div class="carousel-item active" style="background-image: url('images/londres.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Londres</h3>
               <p>Europa Clásica</p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('../images/tulum.jpg')">
+          <div class="carousel-item" style="background-image: url('images/tulum.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Tulum</h3>
               <p>Caribe</p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('../images/newyork.jpg')">
+          <div class="carousel-item" style="background-image: url('images/newyork.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Nueva York</h3>
               <p></p>
@@ -211,8 +211,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
 

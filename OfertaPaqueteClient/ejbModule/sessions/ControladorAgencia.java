@@ -1,5 +1,7 @@
 package sessions;
 
+import java.util.ArrayList;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,45 +31,22 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
         // TODO Auto-generated constructor stub
     }
     
-    //Test
-    /*
-    public int altaAgencia(AgenciaDTO a) {
-    	if(!validarAgencia(a.getNombre(),a.getDireccion())) {
+
+    
+    public int altaAgencia(AgenciaDTO adto)  {
+    	if(!validarAgencia(adto.getNombre(),adto.getDireccion())) {
 
     		Agencia nAgencia = new Agencia();
-    		nAgencia.setNombre(a.getNombre());
-    		nAgencia.setDireccion(a.getDireccion());
+    		nAgencia.setNombre(adto.getNombre());
+    		nAgencia.setDireccion(adto.getDireccion());
     		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
-    		return nAgencia.getId();
-
-    		//sendToBackOfficeSolicitud(nAgencia);
-    		
-    	}else {    		
-    		System.out.println("La agencia existe");
-    		return 0;
-    	}
-    	
-    }
-    */
-    
-    //Fin Test
-    
-    public int altaAgencia(String nombre, String direccion)  {
-    	if(!validarAgencia(nombre,direccion)) {
-
-    		Agencia nAgencia = new Agencia();
-    		nAgencia.setNombre(nombre);
-    		nAgencia.setDireccion(direccion);
-    		nAgencia.setEstado("Pendiente");
-    		em.persist(nAgencia);
-
     		
      		Gson gson = new Gson();
      		
      		System.out.println(gson.toJson(nAgencia));
      		
-    		//sendToBackOfficeSolicitud(nAgencia);
+
     		
      		
     		return nAgencia.getId();
@@ -98,14 +77,32 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     
     
     public Agencia recuperarAgencia(int id) {
-    	return em.find(Agencia.class, id);
-    	
+    	return em.find(Agencia.class, id);    	
     }
+    
+
     
     
     public void actualizarAgencia(Agencia a) {
     	em.merge(a);
     }
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<AgenciaDTO> recuperarAgencias() {
+		ArrayList<AgenciaDTO> lstADTO = new ArrayList<AgenciaDTO>();
+		ArrayList<Agencia> lstA;
+		Query q = em.createQuery("SELECT a FROM Agencia a ");
+		lstA = (ArrayList<Agencia>) q.getResultList();
+		for(Agencia a: lstA) {
+			AgenciaDTO adto = new AgenciaDTO();
+			adto.setId(a.getId());
+			adto.setNombre(a.getNombre());
+			adto.setDireccion(a.getDireccion());
+			adto.setEstado(a.getEstado());
+			lstADTO.add(adto);			
+		}
+		return lstADTO;
+	}
 
 
 

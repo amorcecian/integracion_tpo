@@ -4,4 +4,14 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Controlador</display-name>
+    <servlet-name>Controlador</servlet-name>
+    <servlet-class>servlets.Controlador</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Controlador</servlet-name>
+    <url-pattern>/Controlador</url-pattern>
+  </servlet-mapping>
 </web-app>
