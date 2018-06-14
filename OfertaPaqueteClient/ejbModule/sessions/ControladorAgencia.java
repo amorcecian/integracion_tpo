@@ -2,6 +2,7 @@ package sessions;
 
 import java.util.ArrayList;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import com.google.gson.Gson;
 
 import dto.AgenciaDTO;
 import entities.Agencia;
+import mensajeria.AgenciaRestRemote;
 
 /**
  * Session Bean implementation class ControladorAgencia
@@ -23,6 +25,9 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 	@PersistenceContext(unitName="MyPU")
 	   private EntityManager em;
 	
+	
+	@EJB
+	AgenciaRestRemote agenciaRest;
 
     /**
      * Default constructor. 
@@ -44,9 +49,9 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		
      		Gson gson = new Gson();
      		
-     		System.out.println(gson.toJson(nAgencia));
+     		//System.out.println(gson.toJson(nAgencia));
      		
-
+     		agenciaRest.envioBackoffice(gson.toJson(nAgencia));
     		
      		
     		return nAgencia.getId();
