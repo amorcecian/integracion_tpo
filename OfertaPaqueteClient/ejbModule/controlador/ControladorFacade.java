@@ -7,8 +7,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dto.AgenciaDTO;
+import dto.PaqueteDTO;
 import entities.Agencia;
 import sessions.ControladorAgencia;
+import sessions.ControladorPaquete;
 
 /**
  * Session Bean implementation class Controlador
@@ -18,6 +20,10 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	@EJB
 	ControladorAgencia conAgencias;
+	
+	@EJB
+	ControladorPaquete conPaquetes;
+	
 	private static ControladorFacade instancia;
 	
 	
@@ -36,6 +42,11 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	public ArrayList<AgenciaDTO> recuperarAgencias() {		
 		return conAgencias.recuperarAgencias();		
+	}
+	
+	
+	public ArrayList<PaqueteDTO> recuperarPaquetes() {		
+		return conPaquetes.recuperarPaquetes();
 	}
 
 

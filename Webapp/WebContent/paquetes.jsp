@@ -1,5 +1,12 @@
+<%@page import="dto.PaqueteDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<% 
+List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
+%>
+   
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -100,24 +107,21 @@
 		    </tr>
 		  </thead>
 		  <tbody>
+  			<%
+			if(paquetes != null ){	
+				for (PaqueteDTO p : paquetes) {
+			%>
 		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
+		      <th scope="row"><%= p.getId() %></th>
+		      <td><%= p.getNombre() %></td>
+		      <td><%= p.getDestino().getNombre() %></td>
+		      <td><%= p.getFechaSalida() %></td>
 		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		    </tr>
+		    		    <%
+					};
+				};
+		    %>
+
 		  </tbody>
 		</table>        
       </div>

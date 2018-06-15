@@ -100,6 +100,8 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     public void actualizarAgencia(Agencia a) {
     	em.merge(a);
     }
+    
+    
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<AgenciaDTO> recuperarAgencias() {

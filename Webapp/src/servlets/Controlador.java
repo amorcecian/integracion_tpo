@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controlador.ControladorFacadeRemote;
 import dto.AgenciaDTO;
+import dto.PaqueteDTO;
 
 /**
  * Servlet implementation class Controlador
@@ -93,6 +94,23 @@ public class Controlador extends HttpServlet {
 					e.printStackTrace();
 				}
 	    		jspPage = "agencias.jsp";
+	            break;
+	    		
+	    	}
+	    	case("ListarPaquetes"):{    	    
+				try {
+					context = new InitialContext(jndiProperties);
+					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
+		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
+					
+					List<PaqueteDTO> lpdto= cFacade.recuperarPaquetes();
+					request.setAttribute("paquetes", lpdto);
+	
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		jspPage = "paquetes.jsp";
 	            break;
 	    		
 	    	}
