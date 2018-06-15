@@ -52,8 +52,12 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		nAgencia.setId(id);
     		
     		System.out.println("IMPRIMO EL ID INGRESADO: "+id);
-     		Gson gson = new Gson();
      		
+    		
+    		System.out.println("Antes de crear el GSON");
+    		Gson gson = new Gson();
+    		System.out.println("Despues de crear el GSON");
+    		
      		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(nAgencia));
      		
      		//agenciaRest.envioBackoffice(gson.toJson(nAgencia));
