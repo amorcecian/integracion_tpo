@@ -46,12 +46,17 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		nAgencia.setDireccion(adto.getDireccion());
     		nAgencia.setEstado("Pendiente");
     		em.persist(nAgencia);
+    		//Agrego el flush para despues traerme le ID. Necesito el ID para generar el JSON como esta en el DOC de drive
+    		em.flush();
+    		Integer id = nAgencia.getId();
+    		nAgencia.setId(id);
     		
+    		System.out.println("IMPRIMO EL ID INGRESADO: "+id);
      		Gson gson = new Gson();
      		
-     		//System.out.println(gson.toJson(nAgencia));
+     		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(nAgencia));
      		
-     		agenciaRest.envioBackoffice(gson.toJson(nAgencia));
+     		//agenciaRest.envioBackoffice(gson.toJson(nAgencia));
     		
      		
     		return nAgencia.getId();
