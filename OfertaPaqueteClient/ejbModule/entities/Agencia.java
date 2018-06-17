@@ -19,6 +19,7 @@ public class Agencia implements Serializable {
 	private String nombre;
 	private String direccion;
 	private String estado;
+	private int idBackOffice;
 	@OneToMany
 	@JoinColumn(name="agencia")
 	private List<Paquete> paquetes;
@@ -63,6 +64,14 @@ public class Agencia implements Serializable {
 
 	public void setPaquetes(List<Paquete> paquetes) {
 		this.paquetes = paquetes;
+	}
+
+	public int getIdBackOffice() {
+		return idBackOffice;
+	}
+
+	public void setIdBackOffice(int idBackOffice) {
+		this.idBackOffice = idBackOffice;
 	}
 	
 	

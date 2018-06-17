@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import dto.AgenciaDTO;
 import entities.Agencia;
-import mensajeria.AgenciaRestRemote;
+import mensajeria.BackOfficeRestRemote;
 
 /**
  * Session Bean implementation class ControladorAgencia
@@ -27,7 +27,7 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 	
 	
 	@EJB
-	AgenciaRestRemote agenciaRest;
+	BackOfficeRestRemote agenciaRest;
 
     /**
      * Default constructor. 
@@ -51,16 +51,13 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     		Integer id = nAgencia.getId();
     		nAgencia.setId(id);
     		
-    		System.out.println("IMPRIMO EL ID INGRESADO: "+id);
-     		
+    		adto.setId(id);
+    		adto.setEstado("Pendiente");
     		
-    		System.out.println("Antes de crear el GSON");
-    		Gson gson = new Gson();
-    		System.out.println("Despues de crear el GSON");
-    		
-     		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(nAgencia));
+    		System.out.println("IMPRIMO EL ID INGRESADO: "+id);   		
+
      		
-     		//agenciaRest.envioBackoffice(gson.toJson(nAgencia));
+     		agenciaRest.envioAgenciaBackoffice(adto);
     		
      		
     		return nAgencia.getId();

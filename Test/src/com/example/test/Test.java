@@ -6,12 +6,14 @@ import javax.naming.InitialContext;
 
 import controlador.ControladorFacadeRemote;
 import dto.AgenciaDTO;
+import mensajeria.BackOfficeRestRemote;
 import sessions.ControladorAgenciaRemote;
 
 
 public class Test {
 
 	public static void main(String[] args) throws Exception {
+		/*
 		
 		ControladorFacadeRemote cRemote;  
 		
@@ -32,7 +34,23 @@ public class Test {
 	    cRemote.altaAgencia(a);
 	    
 	    cRemote.altaAgencia(a);
-
+	    */
+	    
+		BackOfficeRestRemote back;  
+		
+	    final Hashtable jndiProperties = new Hashtable();	
+	    
+	    jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");	
+	    
+	    jndiProperties.put("jboss.naming.client.ejb.context", true);
+	    
+	    final Context context = new InitialContext(jndiProperties);
+		
+	    back = (BackOfficeRestRemote) context	    		 
+	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//BackOfficeRest!mensajeria.BackOfficeRestRemote");  
+	    
+	    back.obtenerServicios();
+	          
 	    
 	    
 	     
