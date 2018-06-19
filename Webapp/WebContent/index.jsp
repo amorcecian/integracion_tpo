@@ -32,7 +32,7 @@
               <a class="nav-link" href="Controlador?action=ListarAgencias">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
+              <a class="nav-link" href="Controlador?action=ListarPaquetes">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>

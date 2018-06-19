@@ -3,6 +3,7 @@ package mensajeria;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -10,6 +11,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -19,13 +21,15 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.google.gson.Gson;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 
 import dto.AgenciaDTO;
+import dto.TipoServicioDTO;
 import entities.Agencia;
+import entities.Servicio;
 import entities.TipoServicio;
-import json.AgenciaJson;
 import json.LogJson;
-import json.ServicioJson;
 import sessions.ControladorAgencia;
 import test.Funciones;
 
@@ -53,12 +57,16 @@ public class BackOfficeRest implements BackOfficeRestRemote {
     public void envioAgenciaBackoffice (AgenciaDTO adto) {
 		try {
 			
-		
         input = new FileInputStream("config.properties");
         prop.load(input);
         String urlBackOffice = prop.getProperty("BackOfficeURLAltaAgencia"); 
-    	
         
+        System.out.println(urlBackOffice); 
+        
+	  	Agencia a = cAgencia.recuperarAgencia(adto.getId());
+
+    	
+        /*
 		URL url = new URL(urlBackOffice);
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
@@ -101,14 +109,16 @@ public class BackOfficeRest implements BackOfficeRestRemote {
  		System.out.println(response.toString());
 		
 		
- 		AgenciaJson aj = gson.fromJson(response.toString(), AgenciaJson.class);
- 		System.out.println("Id del backoffice: "+aj.getIdBackoffice());
 		
-		a.setIdBackOffice(aj.getIdBackoffice());
+		int idBackoffice = gson.fromJson(response.toString(), Integer.class);
+ 		System.out.println("Id del backoffice: " + idBackoffice );
+		 		
+		a.setIdBackOffice(idBackoffice);
 		
 		cAgencia.actualizarAgencia(a);
-		
+		*/
 		Loggear("Alta de la agencia: " + a.getNombre() + "con dirección: " + a.getDireccion() + ", IdBackOffice: " + a.getIdBackOffice());
+	
 	
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -123,8 +133,10 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   	        input = new FileInputStream("config.properties");
   	        prop.load(input);
   	        String urlBackOffice = prop.getProperty("BackOfficeURLLog"); 
-  	    	
   	        
+  	        System.out.println(urlBackOffice); 
+  	    	
+  	        /*
   			URL url = new URL(urlBackOffice);
   			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
   			urlConnection.setDoOutput(true);
@@ -149,7 +161,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   			
   	 		System.out.println("Log al backoffice: "+gson.toJson(logJson));
   	 		
-  	 		
+  	 		/*
   		 	DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
   		 	wr.writeBytes(logJson);
   		 	wr.flush();
@@ -161,8 +173,10 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		  	if(codResponse != 200) {
   		  		throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
   		  	}	
+  		  	*/
   		  	
-  		  	
+
+  	 		
   			
   		}catch (Exception e) {
 			e.printStackTrace();
@@ -170,7 +184,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		
   	}
   	
-  	public void obtenerServicios(){
+  	public List<TipoServicioDTO> obtenerServicios(){
+  		List<TipoServicio> listServicios = null;
+  		List<TipoServicioDTO> tsdto = new ArrayList<TipoServicioDTO>();
   		try {
   			/*
 	        input = new FileInputStream("config.properties");
@@ -212,14 +228,34 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 	 		
 	 		*/
 	 		
-  			System.out.println(Funciones.obtenerServicios());
-		  	
-		  	
+  			
+  			Gson gson = new Gson();			
+	 		
+
+  			Type founderListType = new TypeToken<ArrayList<TipoServicio>>(){}.getType();
+
+  			listServicios = gson.fromJson(Funciones.obtenerServicios(), founderListType);
+  			
+  			/*
+  			for(TipoServicio ts:listServicios){
+  				System.out.println("Tipo Servicio: " + ts.getNombre());
+  				for(Servicio s : ts.getServicios()) {
+  					System.out.println("Servicio: " + s.getNombre());
+  				}
+  			}
+  			*/
+	 		
+	 		
+	 		for(TipoServicio ts: listServicios) {
+	 			tsdto.add(ts.toDTO(ts));
+	 		}
+	 		
+  			
   		}catch (Exception e) {
 			e.printStackTrace();
 		}
   		
-
+			return tsdto;
   		
   	}
 

@@ -39,7 +39,7 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
               <a class="nav-link" href="Controlador?action=ListarAgencias">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
+              <a class="nav-link" href="Controlador?action=ListarPaquetes">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>
@@ -129,7 +129,7 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
       
    		<div align="right">
 			<a href="index.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Volver</a>
-	    	<a href="altaPaquete.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Nueva Oferta</a>
+	    	<a href="Controlador?action=AddPaquete" class="btn btn-secondary" role="button" aria-disabled="true">Nueva Oferta</a>
 	    </div>
 
 

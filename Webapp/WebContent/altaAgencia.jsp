@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,7 @@
               <a class="nav-link" href="Controlador?action=ListarAgencias">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
+              <a class="nav-link" href="Controlador?action=ListarPaquetes">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>

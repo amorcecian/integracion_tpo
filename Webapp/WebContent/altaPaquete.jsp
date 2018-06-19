@@ -1,5 +1,11 @@
+<%@page import="dto.ServicioDTO"%>
+<%@page import="dto.TipoServicioDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% 
+List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribute("TipoServicios");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +38,7 @@
               <a class="nav-link" href="Controlador?action=ListarAgencias">Agencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paquetes.jsp">Oferta de Paquetes</a>
+              <a class="nav-link" href="Controlador?action=ListarPaquetes">Oferta de Paquetes</a>
             </li>
           </ul>
         </div>
@@ -90,20 +96,20 @@
       <!-- Marketing Icons Section -->
      <div id="page-wrapper">
       
-      	<form>
+      	<form action="Controlador?action=AltaPaquete" method="post">
 		  <div class="form-group">
 		    <label for="formGroupExampleInput">Nombre</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre">
 		  </div>
 		  
   		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de salida</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de salida">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de salida" name="fechaSalida">
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de regreso</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de regreso">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de regreso" name="fechaRegreso">
 		  </div>
 		  
    		  <div class="form-group">
@@ -129,16 +135,27 @@
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 		  </div>
 		  
+   		    <div class="form-group">
+			    <label for="exampleFormControlSelect1">Tipo Servicio</label>
+			    <select class="form-control" id="exampleFormControlSelect1" name="tipoServicio">
+			      <option disabled="disabled" selected="selected"></option>
+      			<%
+				if(TipoServicios != null ){	
+					for (TipoServicioDTO tsdto : TipoServicios) {
+				%>
+			      <option><%= tsdto.getNombre() %></option>
+			      <%
+						};
+					};
+			      %>
+
+			    </select>
+		  	</div>
 		  
   		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Servicios</label>
-			    <select multiple class="form-control" id="exampleFormControlSelect1">
+			    <select multiple class="form-control" id="exampleFormControlSelect1" name="servicio">
 			      <option disabled="disabled" selected="selected"></option>
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			      <option>5</option>
 			    </select>
 		  	</div>
 		  	
@@ -213,6 +230,15 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="text/javascript">
+
+		("#tipoServicio").change(function(){
+				alert("Hola");
+			});
+			
+	
+   	</script>
 
   </body>
 

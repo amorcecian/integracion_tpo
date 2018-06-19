@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import dto.ServicioDTO;
+import dto.TipoServicioDTO;
+
 
 @Entity
 @Table(name="tipoServicios")
@@ -23,13 +26,13 @@ public class TipoServicio implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String descripcion;
+	private String nombre;
 	@OneToMany (mappedBy = "TipoServicio")	
 	private List<Servicio> servicios;
 	
-	public TipoServicio(int id, String descripcion) {
+	public TipoServicio(int id, String nombre) {
 		this.id = id;
-		this.descripcion = descripcion;
+		this.nombre = nombre;
 		this.servicios = new ArrayList<Servicio>();
 	}
 	
@@ -39,17 +42,38 @@ public class TipoServicio implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDescripcion() {
-		return descripcion;
+
+	public String getNombre() {
+		return nombre;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 	public List<Servicio> getServicios() {
 		return servicios;
 	}
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
+	}
+	
+	public TipoServicioDTO toDTO(TipoServicio ts) {
+		TipoServicioDTO tsDTO = new TipoServicioDTO();
+		tsDTO.setId(ts.getId());
+		tsDTO.setNombre(ts.getNombre());
+		
+		List<ServicioDTO> lsdto = new ArrayList<ServicioDTO>();
+		List<Servicio> ls = ts.getServicios();
+		
+		for(Servicio s : ls) {
+			ServicioDTO sdto = new ServicioDTO();
+			sdto.setId(s.getId());
+			sdto.setNombre(s.getNombre());
+			lsdto.add(sdto);
+		}
+		
+		return tsDTO;
 	}
 	
 	

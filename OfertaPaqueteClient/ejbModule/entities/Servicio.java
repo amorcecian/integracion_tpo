@@ -15,15 +15,15 @@ public class Servicio implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String descripcion;
+	private String nombre;
 	@ManyToOne
 	private TipoServicio TipoServicio;
 	
 	
-	public Servicio(int id, String descripcion) {
+	public Servicio(int id, String nombre) {
 		super();
 		this.id = id;
-		this.descripcion = descripcion;
+		this.nombre = nombre;
 	}
 
 
@@ -37,13 +37,13 @@ public class Servicio implements Serializable{
 	}
 
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombre() {
+		return nombre;
 	}
 
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 

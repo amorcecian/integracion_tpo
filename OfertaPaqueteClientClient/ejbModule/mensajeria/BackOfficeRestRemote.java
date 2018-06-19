@@ -1,8 +1,11 @@
 package mensajeria;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import dto.AgenciaDTO;
+import dto.TipoServicioDTO;
 
 @Remote
 public interface BackOfficeRestRemote {
@@ -11,6 +14,6 @@ public interface BackOfficeRestRemote {
 	 
 	 public void Loggear (String accion);
   	
-	 public void obtenerServicios();
+	 public List<TipoServicioDTO> obtenerServicios();
 
 }

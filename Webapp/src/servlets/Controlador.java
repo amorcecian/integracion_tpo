@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import controlador.ControladorFacadeRemote;
 import dto.AgenciaDTO;
 import dto.PaqueteDTO;
+import dto.TipoServicioDTO;
 
 /**
  * Servlet implementation class Controlador
@@ -113,6 +114,52 @@ public class Controlador extends HttpServlet {
 	    		jspPage = "paquetes.jsp";
 	            break;
 	    		
+	    	}
+	    	case("AddPaquete"):{    	    
+				try {
+					context = new InitialContext(jndiProperties);
+					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
+		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
+					
+					List<TipoServicioDTO> ltsdto= cFacade.recuperarServicios();
+					request.setAttribute("TipoServicios", ltsdto);
+	
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		jspPage = "altaPaquete.jsp";
+	            break;
+	    		
+	    	}
+	    	case("AltaPaquete"):{
+	            String nombre = request.getParameter("nombre");
+	            String fechaSalida = request.getParameter("fechaSalida");
+	            String fechaRegreso = request.getParameter("fechaRegreso");
+	            
+	            /*
+				try {
+					context = new InitialContext(jndiProperties);
+					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
+		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
+					
+					AgenciaDTO adto = new AgenciaDTO();
+					adto.setNombre(nombre);
+					adto.setDireccion(direccion);
+					
+					cFacade.altaAgencia(adto);
+					
+					List<AgenciaDTO> ladto= cFacade.recuperarAgencias();
+					request.setAttribute("agencias", ladto);
+					
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				*/
+	            
+	    		jspPage = "paquetes.jsp";
+	            break;
 	    	}
     	
     	//FIN SWITCH

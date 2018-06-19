@@ -1,19 +1,22 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Remote;
 
 import dto.AgenciaDTO;
 import dto.PaqueteDTO;
+import dto.TipoServicioDTO;
 
 @Remote
 public interface ControladorFacadeRemote {
 	
 	public void altaAgencia(AgenciaDTO a);
 	
-	public ArrayList<AgenciaDTO> recuperarAgencias();
+	public List<AgenciaDTO> recuperarAgencias();
 	
-	public ArrayList<PaqueteDTO> recuperarPaquetes();
+	public List<PaqueteDTO> recuperarPaquetes();
 
+	public List<TipoServicioDTO> recuperarServicios();
 }

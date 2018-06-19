@@ -83,7 +83,7 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 			for(Servicio s : lstS) {
 				ServicioDTO sdto = new ServicioDTO();
 				sdto.setId(s.getId());
-				sdto.setDescripcion(s.getDescripcion());
+				sdto.setNombre(s.getNombre());
 				lstSDTO.add(sdto);
 			}
 			

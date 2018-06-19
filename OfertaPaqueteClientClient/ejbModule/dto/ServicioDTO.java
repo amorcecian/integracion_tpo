@@ -7,7 +7,7 @@ public class ServicioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private String descripcion;
+	private String nombre;
 	
 	
 	public int getId() {
@@ -16,12 +16,13 @@ public class ServicioDTO implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 	
 
 }

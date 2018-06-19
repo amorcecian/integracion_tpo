@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import entities.Agencia;
 import entities.Servicio;
 import entities.TipoServicio;
 
@@ -41,6 +42,20 @@ public abstract class Funciones {
 		Gson gson = new Gson();
 		
 		return gson.toJson(lts);
+		
+	}
+	
+	public static String altaAgencia(String ajson) {
+		
+		Gson json = new Gson();
+		
+		Agencia a = json.fromJson(ajson, Agencia.class);
+		
+		System.out.println("Nombre de la agencia: " + a.getNombre());
+		
+		int idBackoffice = 3;
+		
+		return json.toJson(idBackoffice);		
 		
 	}
 	

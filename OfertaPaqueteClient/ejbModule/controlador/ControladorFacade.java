@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -8,7 +9,9 @@ import javax.ejb.Stateless;
 
 import dto.AgenciaDTO;
 import dto.PaqueteDTO;
+import dto.TipoServicioDTO;
 import entities.Agencia;
+import mensajeria.BackOfficeRestRemote;
 import sessions.ControladorAgencia;
 import sessions.ControladorPaquete;
 
@@ -23,6 +26,9 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	@EJB
 	ControladorPaquete conPaquetes;
+	
+	@EJB
+	BackOfficeRestRemote conBackOffice;
 	
 	private static ControladorFacade instancia;
 	
@@ -40,13 +46,17 @@ public class ControladorFacade implements ControladorFacadeRemote {
 		//sendToBackOfficeSolicitud(nAgencia);
 	}
 	
-	public ArrayList<AgenciaDTO> recuperarAgencias() {		
+	public List<AgenciaDTO> recuperarAgencias() {		
 		return conAgencias.recuperarAgencias();		
 	}
 	
 	
-	public ArrayList<PaqueteDTO> recuperarPaquetes() {		
+	public List<PaqueteDTO> recuperarPaquetes() {		
 		return conPaquetes.recuperarPaquetes();
+	}
+	
+	public List<TipoServicioDTO> recuperarServicios(){
+		return conBackOffice.obtenerServicios();
 	}
 
 
