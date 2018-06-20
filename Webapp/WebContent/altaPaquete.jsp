@@ -1,3 +1,4 @@
+<%@page import="dto.DestinoDTO"%>
 <%@page import="dto.ServicioDTO"%>
 <%@page import="dto.TipoServicioDTO"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,7 @@
     pageEncoding="ISO-8859-1"%>
 <% 
 List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribute("TipoServicios");
+List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,47 +106,64 @@ List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribu
 		  
   		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de salida</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de salida" name="fechaSalida">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaSalida">
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de regreso</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fecha de regreso" name="fechaRegreso">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaRegreso">
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Cupo</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cupo">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cupo" name="cupo">
+		  </div>
+		  
+   		  <div class="form-group">
+		    <label for="formGroupExampleInput">Cantidad de personas</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cantidad de personas" name="cantPersonas">
 		  </div>
 
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Destino</label>
-			    <select class="form-control" id="exampleFormControlSelect1">
+			    <select class="form-control" name="destino">
 			      <option disabled="disabled" selected="selected"></option>
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			      <option>5</option>
+       			<%
+				if(Destinos != null ){	
+					for (DestinoDTO ddto : Destinos) {
+				%>
+			      	<option><%= ddto.getNombre() %></option>
+  				  <% 
+						};
+					};
+			      %>
 			    </select>
 		  	</div>
 		  	
 		  	
 	  	  <div class="form-group">
 		    <label for="exampleFormControlTextarea1">Descripción</label>
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion"></textarea>
 		  </div>
 		  
    		    <div class="form-group">
-			    <label for="exampleFormControlSelect1">Tipo Servicio</label>
-			    <select class="form-control" id="exampleFormControlSelect1" name="tipoServicio">
-			      <option disabled="disabled" selected="selected"></option>
+			    <label for="exampleFormControlSelect1">Servicios</label>
+			    <select multiple class="form-control" name="servicios" id="servicios" size="8">
+			      <option disabled="disabled" selected="selected"></option>			      
       			<%
 				if(TipoServicios != null ){	
 					for (TipoServicioDTO tsdto : TipoServicios) {
 				%>
-			      <option><%= tsdto.getNombre() %></option>
-			      <%
+				  <optgroup label="<%= tsdto.getNombre() %>">
+			      	<%
+			      		for (ServicioDTO sdto : tsdto.getServicios()) {
+					      	%>
+					      	<option><%= sdto.getNombre() %></option>
+					      	<%
+		      			};
+      				%>
+      				  </optgroup>
+   				  <% 
 						};
 					};
 			      %>
@@ -152,28 +171,22 @@ List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribu
 			    </select>
 		  	</div>
 		  
-  		    <div class="form-group">
-			    <label for="exampleFormControlSelect1">Servicios</label>
-			    <select multiple class="form-control" id="exampleFormControlSelect1" name="servicio">
-			      <option disabled="disabled" selected="selected"></option>
-			    </select>
-		  	</div>
 		  	
 
 		  <div class="form-group">
 		    <label for="exampleFormControlFile1">Cargar imagen</label>
-		    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+		    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="imagen">
 		  </div>
 
 		  	
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Precio por persona</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Precio por persona">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Precio por persona" name="precio">
 		  </div>
 		  
    		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Medios de pago</label>
-			    <select class="form-control" id="exampleFormControlSelect1">
+			    <select multiple class="form-control" id="exampleFormControlSelect1" name="medioPago" size="3">
 			      <option disabled="disabled" selected="selected"></option>
 			      <option>Efectivo</option>
 			      <option>Tarjeta</option>
@@ -183,37 +196,30 @@ List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribu
 		  	
 	  	  <div class="form-group">
 		    <label for="exampleFormControlTextarea1">Políticas de cancelación</label>
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="politicas"></textarea>
 		  </div>
 
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Estado</label>
-			    <select class="form-control" id="exampleFormControlSelect1">
+			    <select class="form-control" id="exampleFormControlSelect1" name="estado">
 			      <option disabled="disabled" selected="selected"></option>
-			      <option>Acivo</option>
+			      <option>Activo</option>
 			      <option>Inactivo</option>
 			    </select>
 		  	</div>
 
 
-		  
-		  
+
+	      <!-- /.row -->
+	      
+	   		<div align="right">
+	   			 <a href="paquetes.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+		    	 <button type="submit" class="btn btn-secondary">Grabar</button>
+		    </div>
+	
 		</form>
-      
- 
-		
-		
-		      
+	
       </div>
-      <!-- /.row -->
-      
-   		<div align="right">
-   			 <a href="paquetes.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
-	    	 <button type="button" class="btn btn-secondary">Grabar</button>
-	    </div>
-
-
-
 
       <hr>
 
@@ -231,14 +237,6 @@ List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribu
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
-    <script type="text/javascript">
-
-		("#tipoServicio").change(function(){
-				alert("Hola");
-			});
-			
-	
-   	</script>
 
   </body>
 

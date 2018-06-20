@@ -1,8 +1,12 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -15,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controlador.ControladorFacadeRemote;
 import dto.AgenciaDTO;
+import dto.DestinoDTO;
 import dto.PaqueteDTO;
 import dto.TipoServicioDTO;
 
@@ -74,8 +79,7 @@ public class Controlador extends HttpServlet {
 					List<AgenciaDTO> ladto= cFacade.recuperarAgencias();
 					request.setAttribute("agencias", ladto);
 					
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	            
@@ -90,8 +94,7 @@ public class Controlador extends HttpServlet {
 					List<AgenciaDTO> ladto= cFacade.recuperarAgencias();
 					request.setAttribute("agencias", ladto);
 	
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	    		jspPage = "agencias.jsp";
@@ -107,8 +110,7 @@ public class Controlador extends HttpServlet {
 					List<PaqueteDTO> lpdto= cFacade.recuperarPaquetes();
 					request.setAttribute("paquetes", lpdto);
 	
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	    		jspPage = "paquetes.jsp";
@@ -123,9 +125,11 @@ public class Controlador extends HttpServlet {
 					
 					List<TipoServicioDTO> ltsdto= cFacade.recuperarServicios();
 					request.setAttribute("TipoServicios", ltsdto);
+					
+					List<DestinoDTO> lddto = cFacade.recuperarDestinos();
+					request.setAttribute("Destinos", lddto);
 	
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	    		jspPage = "altaPaquete.jsp";
@@ -137,26 +141,62 @@ public class Controlador extends HttpServlet {
 	            String fechaSalida = request.getParameter("fechaSalida");
 	            String fechaRegreso = request.getParameter("fechaRegreso");
 	            
-	            /*
+	            String cupo = request.getParameter("cupo");
+	            String cantPersonas = request.getParameter("cantPersonas");
+	            
+	            String destino = request.getParameter("destino");
+	            String descripcion = request.getParameter("descripcion");
+	            
+	            String servicios = request.getParameter("servicios");
+	            String imagen = request.getParameter("imagen");
+	            String precio = request.getParameter("precio");
+	            
+	            String medioPago = request.getParameter("medioPago");
+	            String politicas = request.getParameter("politicas");
+	            String estado = request.getParameter("estado");
+	            
+	            
 				try {
 					context = new InitialContext(jndiProperties);
 					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
 		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
 					
-					AgenciaDTO adto = new AgenciaDTO();
-					adto.setNombre(nombre);
-					adto.setDireccion(direccion);
+					PaqueteDTO pdto = new PaqueteDTO();
+					pdto.setNombre(nombre);
 					
-					cFacade.altaAgencia(adto);
+					//Buscar Destino en BD					
+
+					DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date date1 = (Date) sourceFormat.parse(fechaRegreso);					
+					pdto.setFechaIngreso(date1);
 					
-					List<AgenciaDTO> ladto= cFacade.recuperarAgencias();
-					request.setAttribute("agencias", ladto);
+					Date date2 = (Date) sourceFormat.parse(fechaSalida);
+					pdto.setFechaSalida(date2);
 					
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
+					pdto.setEstado(estado);
+					
+
+					pdto.setCupo(Integer.parseInt(cupo));
+					pdto.setCantPersonas(Integer.parseInt(cantPersonas));
+					
+					//Falta lista de Servicios
+					pdto.setPrecioPersona(Double.parseDouble(precio));
+					pdto.setDescripcion(descripcion);
+					pdto.setFoto(imagen);
+					pdto.setPoliticasDeCancelacion(politicas);
+					
+
+					System.out.println("Paquete: " + pdto.toString());
+					
+					cFacade.altaPaquete(pdto);
+					
+					List<PaqueteDTO> lpdto= cFacade.recuperarPaquetes();
+					request.setAttribute("paquetes", lpdto);
+					
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				*/
+				
 	            
 	    		jspPage = "paquetes.jsp";
 	            break;

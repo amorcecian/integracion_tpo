@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import dto.ServicioDTO;
+
 @Entity
 @Table(name="servicios")
 public class Servicio implements Serializable{
@@ -56,6 +58,14 @@ public class Servicio implements Serializable{
 		TipoServicio = tipoServicio;
 	}
 	
+	public ServicioDTO toDTO (Servicio s) {
+		ServicioDTO sdto = new ServicioDTO();
+		
+		sdto.setId(s.getId());
+		sdto.setNombre(s.getNombre());
+		
+		return sdto;
+	}
 	
 	
 

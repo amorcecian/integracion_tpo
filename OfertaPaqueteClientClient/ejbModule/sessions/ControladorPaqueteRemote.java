@@ -1,15 +1,20 @@
 package sessions;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import javax.ejb.Remote;
+
+import dto.DestinoDTO;
 import dto.PaqueteDTO;
 
 
 @Remote
 public interface ControladorPaqueteRemote {
 	
-	public int altaPaquete(PaqueteDTO pdto); 
+	public void altaPaquete(PaqueteDTO pdto); 
 	
-	public ArrayList<PaqueteDTO> recuperarPaquetes();
+	public List<PaqueteDTO> recuperarPaquetes();
+	
+	public List<DestinoDTO> obtenerDestinos();
 
 }

@@ -16,6 +16,7 @@ import dto.DestinoDTO;
 import dto.PaqueteDTO;
 import dto.ServicioDTO;
 import entities.Agencia;
+import entities.Destino;
 import entities.Paquete;
 import entities.Servicio;
 
@@ -37,9 +38,43 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
         // TODO Auto-generated constructor stub
     }
     
-    public int altaPaquete(PaqueteDTO pdto)  {
-    	//TO DO
-    	return 0;
+    public void altaPaquete(PaqueteDTO pdto)  {
+    	Paquete p = new Paquete();
+    	p.setNombre(pdto.getNombre());
+    	
+    	Destino d = new Destino();
+    	d.setId(pdto.getDestino().getId());
+    	d.setNombre(pdto.getDestino().getNombre());
+    	p.setDestino(d);
+    	
+    	p.setFechaIngreso(pdto.getFechaIngreso());
+    	p.setFechaSalida(pdto.getFechaSalida());
+    	
+    	p.setEstado(pdto.getEstado());
+    	p.setCupo(pdto.getCupo());
+    	p.setPrecioPersona(pdto.getPrecioPersona());
+    	
+    	//Falta la lista de Servicios
+    	
+    	p.setDescripcion(pdto.getDescripcion());
+    	p.setFoto(pdto.getFoto());
+    	p.setCantPersonas(pdto.getCantPersonas());
+    	p.setPoliticasDeCancelacion(pdto.getPoliticasDeCancelacion());
+    	
+    	em.persist(p);
+		em.flush();
+		
+		Integer id = p.getId();
+		p.setId(id);
+		
+		pdto.setId(id);
+		
+
+		System.out.println("ID PAQUETE INGRESADO: "+id);   		
+
+ 		
+ 		//portalCola.envioPaquete(pdto);
+
     }
     
     public Paquete recuperarPaquete(int id) {
@@ -53,11 +88,31 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     	em.merge(p);
     }
     
-	public ArrayList<PaqueteDTO> recuperarPaquetes() {
-		ArrayList<PaqueteDTO> lstPDTO = new ArrayList<PaqueteDTO>();
-		ArrayList<Paquete> lstP;
+    @SuppressWarnings("unchecked")
+	public List<DestinoDTO> obtenerDestinos(){
+    	List<DestinoDTO> lddto = new ArrayList<DestinoDTO>();
+    	List<Destino> ld;
+    	
+		Query q = em.createQuery("SELECT d FROM Destino d ORDER BY d.nombre");
+		ld = (List<Destino>) q.getResultList();
+		for(Destino d : ld) {
+			DestinoDTO ddto = new DestinoDTO();
+			ddto.setId(d.getId());
+			ddto.setLatitud("-38.0172131");
+			ddto.setLongitud("-57.7406177");
+			ddto.setNombre(d.getNombre());
+			lddto.add(ddto);			
+		}
+    	
+    	return lddto;
+    }
+    
+	@SuppressWarnings("unchecked")
+	public List<PaqueteDTO> recuperarPaquetes() {
+		List<PaqueteDTO> lstPDTO = new ArrayList<PaqueteDTO>();
+		List<Paquete> lstP;
 		Query q = em.createQuery("SELECT p FROM Paquete p ");
-		lstP = (ArrayList<Paquete>) q.getResultList();
+		lstP = (List<Paquete>) q.getResultList();
 		for(Paquete p: lstP) {
 			PaqueteDTO pdto = new PaqueteDTO();
 			

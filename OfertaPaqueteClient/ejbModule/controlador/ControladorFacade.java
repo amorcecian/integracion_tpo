@@ -8,6 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dto.AgenciaDTO;
+import dto.DestinoDTO;
 import dto.PaqueteDTO;
 import dto.TipoServicioDTO;
 import entities.Agencia;
@@ -42,8 +43,7 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	
 	public void altaAgencia(AgenciaDTO a) {
-		a.setId(conAgencias.altaAgencia(a));
-		//sendToBackOfficeSolicitud(nAgencia);
+		conAgencias.altaAgencia(a);
 	}
 	
 	public List<AgenciaDTO> recuperarAgencias() {		
@@ -57,6 +57,14 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	public List<TipoServicioDTO> recuperarServicios(){
 		return conBackOffice.obtenerServicios();
+	}
+	
+	public List<DestinoDTO> recuperarDestinos(){
+		return conPaquetes.obtenerDestinos();
+	}
+	
+	public void altaPaquete(PaqueteDTO p) {
+		conPaquetes.altaPaquete(p);
 	}
 
 

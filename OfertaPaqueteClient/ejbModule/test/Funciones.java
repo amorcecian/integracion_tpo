@@ -37,8 +37,7 @@ public abstract class Funciones {
 		lts.add(ts1);
 		lts.add(ts2);
 		lts.add(ts3);
-		
-		System.out.println("Llego hasta aca");
+
 		Gson gson = new Gson();
 		
 		return gson.toJson(lts);

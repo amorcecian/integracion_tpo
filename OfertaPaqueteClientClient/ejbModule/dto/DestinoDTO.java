@@ -10,8 +10,8 @@ public class DestinoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
-	private double latitud;
-	private double longitud;
+	private String latitud;
+	private String longitud;
 	public int getId() {
 		return id;
 	}
@@ -24,18 +24,17 @@ public class DestinoDTO implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
-	
 
 }

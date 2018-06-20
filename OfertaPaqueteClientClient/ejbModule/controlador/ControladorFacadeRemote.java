@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import dto.AgenciaDTO;
+import dto.DestinoDTO;
 import dto.PaqueteDTO;
 import dto.TipoServicioDTO;
 
@@ -19,4 +20,8 @@ public interface ControladorFacadeRemote {
 	public List<PaqueteDTO> recuperarPaquetes();
 
 	public List<TipoServicioDTO> recuperarServicios();
+	
+	public List<DestinoDTO> recuperarDestinos();
+	
+	public void altaPaquete(PaqueteDTO p);
 }

@@ -25,7 +25,7 @@ public class Paquete implements Serializable{
 	private Date fechaSalida;
 	private String estado;
 	private int cupo;
-	private float precioPersona;
+	private double precioPersona;
 	@ManyToMany(cascade={CascadeType.MERGE})
 	@JoinTable(name="paquete_servicio",joinColumns=@JoinColumn(name="id_paquete"),
 	inverseJoinColumns=@JoinColumn(name="id_servicio"))
@@ -35,25 +35,8 @@ public class Paquete implements Serializable{
 	private int cantPersonas;
 	private String politicasDeCancelacion;
 	
-	
-	public Paquete(int id, String nombre, Destino destino, Date fechaIngreso, Date fechaSalida, String estado, int cupo,
-			float precioPersona, List<Servicio> servicios, String descripcion, String foto, int cantPersonas,
-			String politicasDeCancelacion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.destino = destino;
-		this.fechaIngreso = fechaIngreso;
-		this.fechaSalida = fechaSalida;
-		this.estado = estado;
-		this.cupo = cupo;
-		this.precioPersona = precioPersona;
-		this.servicios = servicios;
-		this.descripcion = descripcion;
-		this.foto = foto;
-		this.cantPersonas = cantPersonas;
-		this.politicasDeCancelacion = politicasDeCancelacion;
-	}
+	@OneToMany (mappedBy = "MedioPago")
+	private List<FormasDePago> mediosDePago;
 
 
 	public int getId() {
@@ -126,12 +109,12 @@ public class Paquete implements Serializable{
 	}
 
 
-	public float getPrecioPersona() {
+	public double getPrecioPersona() {
 		return precioPersona;
 	}
 
 
-	public void setPrecioPersona(float precioPersona) {
+	public void setPrecioPersona(double precioPersona) {
 		this.precioPersona = precioPersona;
 	}
 

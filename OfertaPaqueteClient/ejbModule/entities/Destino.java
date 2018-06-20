@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="destinos")
+@Table(name="city")
 public class Destino implements Serializable {
 	
 	/**
@@ -15,17 +15,13 @@ public class Destino implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@Column(name="city_name")
 	private String nombre;
-	private double latitud;
-	private double longitud;
+	@Column(nullable =true)
+	private String latitud;
+	@Column(nullable =true)
+	private String longitud;
 	
-	public Destino(int id, String nombre, double latitud, double longitud) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.latitud = latitud;
-		this.longitud = longitud;
-	}
 
 	public int getId() {
 		return id;
@@ -43,22 +39,19 @@ public class Destino implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
-	
-	
-
 }

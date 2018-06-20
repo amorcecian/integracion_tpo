@@ -15,7 +15,7 @@ public class PaqueteDTO implements Serializable {
 	private Date fechaSalida;
 	private String estado;
 	private int cupo;
-	private float precioPersona;
+	private double precioPersona;
 	private List<ServicioDTO> servicios;
 	private String descripcion;
 	private String foto;
@@ -63,10 +63,10 @@ public class PaqueteDTO implements Serializable {
 	public void setCupo(int cupo) {
 		this.cupo = cupo;
 	}
-	public float getPrecioPersona() {
+	public double getPrecioPersona() {
 		return precioPersona;
 	}
-	public void setPrecioPersona(float precioPersona) {
+	public void setPrecioPersona(double precioPersona) {
 		this.precioPersona = precioPersona;
 	}
 	public List<ServicioDTO> getServicios() {
@@ -98,6 +98,15 @@ public class PaqueteDTO implements Serializable {
 	}
 	public void setPoliticasDeCancelacion(String politicasDeCancelacion) {
 		this.politicasDeCancelacion = politicasDeCancelacion;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "PaqueteDTO [nombre=" + nombre + ", destino=" + destino + ", fechaIngreso=" + fechaIngreso
+				+ ", fechaSalida=" + fechaSalida + ", estado=" + estado + ", cupo=" + cupo + ", precioPersona="
+				+ precioPersona + ", servicios=" + servicios + ", descripcion=" + descripcion + ", foto=" + foto
+				+ ", cantPersonas=" + cantPersonas + ", politicasDeCancelacion=" + politicasDeCancelacion + "]";
 	}
 	
 	

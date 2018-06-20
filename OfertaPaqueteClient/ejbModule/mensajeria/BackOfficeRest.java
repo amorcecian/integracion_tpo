@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
 import dto.AgenciaDTO;
+import dto.ServicioDTO;
 import dto.TipoServicioDTO;
 import entities.Agencia;
 import entities.Servicio;
@@ -186,7 +187,8 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   	
   	public List<TipoServicioDTO> obtenerServicios(){
   		List<TipoServicio> listServicios = null;
-  		List<TipoServicioDTO> tsdto = new ArrayList<TipoServicioDTO>();
+  		List<TipoServicioDTO> listtsdto = new ArrayList<TipoServicioDTO>();
+
   		try {
   			/*
 	        input = new FileInputStream("config.properties");
@@ -247,7 +249,14 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 	 		
 	 		
 	 		for(TipoServicio ts: listServicios) {
-	 			tsdto.add(ts.toDTO(ts));
+	 			TipoServicioDTO tsdto = ts.toDTO(ts);
+	 	  		List<ServicioDTO> lsdto = new ArrayList<ServicioDTO>();
+	 			for(Servicio s : ts.getServicios()) {
+	 				ServicioDTO sdto = s.toDTO(s);
+	 				lsdto.add(sdto);
+	 			}
+	 			tsdto.setServicios(lsdto);
+	 			listtsdto.add(tsdto);
 	 		}
 	 		
   			
@@ -255,7 +264,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 			e.printStackTrace();
 		}
   		
-			return tsdto;
+			return listtsdto;
   		
   	}
 
