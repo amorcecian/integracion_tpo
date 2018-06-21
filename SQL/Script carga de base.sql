@@ -1,4 +1,13 @@
 
+
+---Cargo los medios de pago ---
+INSERT INTO  formas_pago  ( id , descripcion ) VALUES (1,'Efectivo');
+INSERT INTO  formas_pago  ( id , descripcion ) VALUES (2,'Tarjeta');
+INSERT INTO  formas_pago  ( id , descripcion ) VALUES (3,'Cheque');
+
+
+
+---Cargo los destinos ---
 INSERT INTO  city  ( id , city_name ) VALUES (10001,'Arauco');
 INSERT INTO  city  ( id , city_name ) VALUES (10002,'Aminga');
 INSERT INTO  city  ( id , city_name ) VALUES (10003,'Chamical');

@@ -54,7 +54,8 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     
     public void altaPaquete(PaqueteDTO pdto)  {
     	Paquete p = new Paquete();
-    	
+		PaqueteJson pjson = new PaqueteJson();
+		
     	System.out.println("ID Agencia: " + pdto.getAgencia().getId());
     	Agencia a = conAgencias.recuperarAgencia(pdto.getAgencia().getId());
     	p.setAgencia(a);
@@ -73,12 +74,35 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     	p.setCupo(pdto.getCupo());
     	p.setPrecioPersona(pdto.getPrecioPersona());
     	
-    	//Falta la lista de Servicios
+    	
+		List<String> lstsjson = new ArrayList<String>();
+		List<Servicio> ltss = new ArrayList<Servicio>();
+		for(ServicioDTO sdto: pdto.getServicios()){
+			System.out.println("Id del servicio: " + sdto.getId());
+			String ss = this.recuperarServicio(sdto.getId()).getNombre();
+			Servicio s = this.recuperarServicio(sdto.getId());
+			lstsjson.add(ss);
+			ltss.add(s);
+		}
+		pjson.setServicios(lstsjson);
+		p.setServicios(ltss);
+
     	
     	p.setDescripcion(pdto.getDescripcion());
     	p.setFoto(pdto.getFoto());
     	p.setCantPersonas(pdto.getCantPersonas());
     	p.setPoliticasDeCancelacion(pdto.getPoliticasDeCancelacion());
+    	
+		List<String> medioPago = new ArrayList<String>();
+		List<FormasDePago> lstfp = new ArrayList<FormasDePago>();
+		for(FormasDePagoDTO fpdto: pdto.getFormPagos()){
+			String mp = this.recuperarFormadePago(fpdto.getId()).getDescripcion();
+			FormasDePago fp = this.recuperarFormadePago(fpdto.getId());
+			lstfp.add(fp);
+			medioPago.add(mp);
+		}
+		pjson.setMediosDePago(medioPago);
+		p.setMediosDePago(lstfp);
     	
     	em.persist(p);
 		em.flush();
@@ -91,7 +115,7 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 
 		System.out.println("ID PAQUETE INGRESADO: "+id);   	
 		
-		PaqueteJson pjson = new PaqueteJson();
+
 		
 		pjson.setId(p.getId());
 		pjson.setNombre(p.getNombre());
@@ -106,22 +130,6 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		pjson.setPoliticas(p.getPoliticasDeCancelacion());
 		
 		pjson.setPrecio(p.getPrecioPersona());
-		
-
-		List<String> medioPago = new ArrayList<String>();
-		for(FormasDePagoDTO fpdto: pdto.getFormPagos()){
-			String mp = this.recuperarFormadePago(fpdto.getId()).getDescripcion();
-			medioPago.add(mp);
-		}
-		pjson.setMediosDePago(medioPago);
-		
-		
-		List<String> servicios = new ArrayList<String>();
-		for(ServicioDTO sdto: pdto.getServicios()){
-			String s = this.recuperarServicio(sdto.getId()).getNombre();
-			servicios.add(s);
-		}
-		pjson.setServicios(servicios);
 		
  		Gson gson = new Gson();
  		
@@ -245,27 +253,12 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		return lfpdto;
 	}
 	
-	public FormasDePagoDTO recuperarFormadePago(int id){
-		FormasDePagoDTO fpdto = new FormasDePagoDTO();
-		
-		FormasDePago fp = em.find(FormasDePago.class, id);
-		
-		fpdto.setId(fp.getId());
-		fpdto.setDescripcion(fp.getDescripcion());
-		
-		return fpdto;
-		
+	public FormasDePago recuperarFormadePago(int id){		
+		return em.find(FormasDePago.class, id);		
 	}
 	
-	public ServicioDTO recuperarServicio(int id) {
-		ServicioDTO sdto = new ServicioDTO();
-		
-		Servicio s = em.find(Servicio.class, id);
-		
-		sdto.setId(s.getId());
-		sdto.setNombre(s.getNombre());
-		
-		return sdto;
+	public Servicio recuperarServicio(int id) {		
+		return em.find(Servicio.class, id);
 	}
 
 }

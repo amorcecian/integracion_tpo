@@ -44,8 +44,6 @@ import test.Funciones;
 @LocalBean
 public class BackOfficeRest implements BackOfficeRestRemote {
 	
-    Properties prop = new Properties();
-    InputStream input = null;
     
 	@PersistenceContext(unitName="MyPU")
 	   private EntityManager em;
@@ -62,18 +60,12 @@ public class BackOfficeRest implements BackOfficeRestRemote {
     
     public void envioAgenciaBackoffice (AgenciaDTO adto) {
 		try {
-			
-        input = new FileInputStream("config.properties");
-        prop.load(input);
-        String urlBackOffice = prop.getProperty("BackOfficeURLAltaAgencia"); 
-        
-        System.out.println(urlBackOffice); 
         
 	  	Agencia a = cAgencia.recuperarAgencia(adto.getId());
 
     	
         /*
-		URL url = new URL(urlBackOffice);
+		URL url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
@@ -136,14 +128,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   	public void Loggear (int accion) {
   		
   		try {
-  	        input = new FileInputStream("config.properties");
-  	        prop.load(input);
-  	        String urlBackOffice = prop.getProperty("BackOfficeURLLog"); 
-  	        
-  	        System.out.println(urlBackOffice); 
-  	    	
+ 	    	
   	        /*
-  			URL url = new URL(urlBackOffice);
+			URL url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/ServiciosBO/RegistrarLog");
   			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
   			urlConnection.setDoOutput(true);
   			urlConnection.setRequestMethod("POST");
@@ -195,13 +182,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		List<TipoServicioDTO> listtsdto = new ArrayList<TipoServicioDTO>();
 
   		try {
-  			/*
-	        input = new FileInputStream("config.properties");
-	        prop.load(input);
-	        String urlBackOffice = prop.getProperty("BackOfficeURLServicios"); 
-	    	
+  			/*   	
 	        
-			URL url = new URL(urlBackOffice);
+			URL url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/ServiciosBO/GetServiciosPorTipo");
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("GET");
@@ -244,6 +227,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   			listServicios = gson.fromJson(Funciones.obtenerServicios(), founderListType);
   			
   			/*
+  			//Test para imprimir lo que recibo
   			for(TipoServicio ts:listServicios){
   				System.out.println("Tipo Servicio: " + ts.getNombre());
   				for(Servicio s : ts.getServicios()) {

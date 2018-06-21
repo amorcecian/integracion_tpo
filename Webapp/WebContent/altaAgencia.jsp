@@ -92,13 +92,15 @@
      <div id="page-wrapper">
       
       	<form action="Controlador?action=AltaAgencia" method="post">
+      	
+      	
 		  <div class="form-group">
 		    <label for="formGroupExampleInput">Nombre</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">Dirección</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Dirección" name="direccion">
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Dirección" name="direccion" required>
 		  </div>
 		  <fieldset disabled>
 	      <div class="form-group">
@@ -137,6 +139,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jqBootstrapValidation.js"></script>
 
   </body>
 

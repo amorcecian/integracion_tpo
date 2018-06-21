@@ -98,7 +98,6 @@ List<AgenciaDTO> agencias = (List<AgenciaDTO>) request.getAttribute("agencias");
 	      <table class="table table-striped">
 		  <thead>
 		    <tr>
-		      <th scope="col">#</th>
 		      <th scope="col">Nombre</th>
 		      <th scope="col">Dirección</th>
 		      <th scope="col">Estado</th>
@@ -110,7 +109,6 @@ List<AgenciaDTO> agencias = (List<AgenciaDTO>) request.getAttribute("agencias");
 				for (AgenciaDTO a : agencias) {
 			%>
 		    <tr>
-		      <th scope="row"><%= a.getId() %></th>
 		      <td><%= a.getNombre() %></td>
 		      <td><%= a.getDireccion() %></td>
 		      <td><%= a.getEstado() %></td>

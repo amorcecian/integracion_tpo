@@ -17,8 +17,7 @@ public class FormasDePago implements Serializable{
 	private int id;
 	private String descripcion;
 	
-	@ManyToOne
-	private Paquete MedioPago;
+
 	
 	public FormasDePago(int id, String descripcion) {
 		super();

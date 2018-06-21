@@ -41,7 +41,10 @@ public class Paquete implements Serializable{
 	private int cantPersonas;
 	private String politicasDeCancelacion;
 	
-	@OneToMany (mappedBy = "MedioPago")
+
+	@ManyToMany(cascade={CascadeType.MERGE})
+	@JoinTable(name="paquete_formaPago",joinColumns=@JoinColumn(name="id_paquete"),
+	inverseJoinColumns=@JoinColumn(name="id_formaPago"))
 	private List<FormasDePago> mediosDePago;
 	
 	

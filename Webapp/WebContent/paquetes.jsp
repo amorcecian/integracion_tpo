@@ -1,3 +1,7 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="dto.PaqueteDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -100,10 +104,12 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 	      <table class="table table-striped">
 		  <thead>
 		    <tr>
-		      <th scope="col">#</th>
 		      <th scope="col">Nombre</th>
 		      <th scope="col">Destino</th>
 		      <th scope="col">Fecha de Salida</th>
+		      <th scope="col">Fecha de Regreso</th>
+		      <th scope="col">Cupo</th>
+   		      <th scope="col">Estado</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -112,10 +118,12 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 				for (PaqueteDTO p : paquetes) {
 			%>
 		    <tr>
-		      <th scope="row"><%= p.getId() %></th>
 		      <td><%= p.getNombre() %></td>
 		      <td><%= p.getDestino().getNombre() %></td>
 		      <td><%= p.getFechaSalida() %></td>
+		      <td><%= p.getFechaIngreso() %></td>
+		      <td><%= p.getCupo() %></td>
+   		      <td><%= p.getEstado() %></td>
 		    </tr>
 		    		    <%
 					};

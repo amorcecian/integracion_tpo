@@ -124,27 +124,27 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
       	
 		  <div class="form-group">
 		    <label for="formGroupExampleInput">Nombre</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre" required>
 		  </div>
 		  
   		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de salida</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaSalida">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaSalida" required>
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de regreso</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaRegreso">
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaRegreso" required>
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Cupo</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cupo" name="cupo">
+		    <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Cupo" name="cupo" required>
 		  </div>
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Cantidad de personas</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cantidad de personas" name="cantPersonas">
+		    <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Cantidad de personas" name="cantPersonas" required>
 		  </div>
 
 		    <div class="form-group">
@@ -166,7 +166,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
 	  	  <div class="form-group">
 		    <label for="exampleFormControlTextarea1">Descripción</label>
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" required></textarea>
 		  </div>
 		  
    		    <div class="form-group">
@@ -204,7 +204,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Precio por persona</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Precio por persona" name="precio">
+		    <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Precio por persona" name="precio" required>
 		  </div>
 		  
    		    <div class="form-group">
@@ -226,7 +226,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
 	  	  <div class="form-group">
 		    <label for="exampleFormControlTextarea1">Políticas de cancelación</label>
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="politicas"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="politicas" required></textarea>
 		  </div>
 
 		    <div class="form-group">
@@ -266,7 +266,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="js/jqBootstrapValidation.js"></script>
     
 
   </body>

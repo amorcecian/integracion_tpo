@@ -1,0 +1,13 @@
+{
+	"id":3,
+	"nombre":"Test 2",
+	"cupo":10,
+	"cantPersonas":2,
+	"fechaDesde":"Mar 5, 2018 12:00:00 AM",
+	"fechaHasta":"Feb 25, 2018 12:00:00 AM",
+	"precio":500.0,
+	"descripcion":"Test 4",
+	"politicas":"No hay. ",
+	"servicios":["Casino","Caja fuerte"],
+	"mediosDePago":["Efectivo","Tarjeta"]
+}
