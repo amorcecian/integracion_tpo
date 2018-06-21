@@ -104,7 +104,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
      
      
       
-      	<form action="Controlador?action=AltaPaquete" method="post">
+      	<form action="Controlador?action=AltaPaquete" method="post" enctype="multipart/form-data">
 	
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Agencia</label>
@@ -197,9 +197,10 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
 
 		  <div class="form-group">
-		    <label for="exampleFormControlFile1">Cargar imagen</label>
-		    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="imagen">
+		    <label for="file">Cargar imagen</label>
+		    <input type="file" name="file" class="form-control-file">
 		  </div>
+
 
 		  	
    		  <div class="form-group">

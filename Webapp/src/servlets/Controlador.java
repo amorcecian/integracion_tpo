@@ -1,6 +1,11 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +19,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +32,15 @@ import dto.PaqueteDTO;
 import dto.ServicioDTO;
 import dto.TipoServicioDTO;
 
+import javax.servlet.http.Part;
+
+
+
 /**
  * Servlet implementation class Controlador
  */
 @WebServlet("/Controlador")
+@MultipartConfig
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -159,7 +170,10 @@ public class Controlador extends HttpServlet {
 	            String descripcion = request.getParameter("descripcion");
 	            
   				String[] servicios = (String[]) request.getParameterValues("servicios");
-	            String imagen = request.getParameter("imagen");
+	            
+  		 		String imagen = UploadFile(request, response);
+  		 		
+
 	            String precio = request.getParameter("precio");
 	            
 				String[] medioPago = (String[]) request.getParameterValues("medioPago");
@@ -259,5 +273,36 @@ public class Controlador extends HttpServlet {
             rd.forward(request, response);
         }
     }
+    
+    
+	private String UploadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+
+	    
+	    
+	    //String path="C:/Users/DANIEL/workspace7/OPaqWeb/WebContent";
+	    String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent";
+	    
+	    File uploads = new File(path); //Carpeta donde se guardan los archivos
+	    //uploads.mkdirs(); //Crea los directorios necesarios
+	    File file = File.createTempFile("Paquete-", "-"+fileName, uploads); //Evita que hayan dos archivos con el mismo nombre
+	
+	    
+	    try (InputStream input = filePart.getInputStream()){
+	        Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	        input.close();
+	    }
+	    
+	    int i = file.getName().length();
+	    //String a = file.getName().substring(45, i-1);
+	    String a = file.getName();
+	    
+	    
+	    uploads = null;
+	    return a;
+	}
+	
+	
 
 }
