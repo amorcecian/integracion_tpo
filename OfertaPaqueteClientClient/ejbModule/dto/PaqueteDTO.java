@@ -15,12 +15,16 @@ public class PaqueteDTO implements Serializable {
 	private Date fechaSalida;
 	private String estado;
 	private int cupo;
-	private double precioPersona;
+	private float precioPersona;
 	private List<ServicioDTO> servicios;
 	private String descripcion;
 	private String foto;
 	private int cantPersonas;
 	private String politicasDeCancelacion;
+	private AgenciaDTO agencia;
+	
+	private List<FormasDePagoDTO> formPagos;
+	
 	public int getId() {
 		return id;
 	}
@@ -63,10 +67,10 @@ public class PaqueteDTO implements Serializable {
 	public void setCupo(int cupo) {
 		this.cupo = cupo;
 	}
-	public double getPrecioPersona() {
+	public float getPrecioPersona() {
 		return precioPersona;
 	}
-	public void setPrecioPersona(double precioPersona) {
+	public void setPrecioPersona(float precioPersona) {
 		this.precioPersona = precioPersona;
 	}
 	public List<ServicioDTO> getServicios() {
@@ -100,15 +104,28 @@ public class PaqueteDTO implements Serializable {
 		this.politicasDeCancelacion = politicasDeCancelacion;
 	}
 	
+	public AgenciaDTO getAgencia() {
+		return agencia;
+	}
+	public void setAgencia(AgenciaDTO agencia) {
+		this.agencia = agencia;
+	}
 	
+	
+	public List<FormasDePagoDTO> getFormPagos() {
+		return formPagos;
+	}
+	public void setFormPagos(List<FormasDePagoDTO> formPagos) {
+		this.formPagos = formPagos;
+	}
 	@Override
 	public String toString() {
 		return "PaqueteDTO [nombre=" + nombre + ", destino=" + destino + ", fechaIngreso=" + fechaIngreso
 				+ ", fechaSalida=" + fechaSalida + ", estado=" + estado + ", cupo=" + cupo + ", precioPersona="
 				+ precioPersona + ", servicios=" + servicios + ", descripcion=" + descripcion + ", foto=" + foto
-				+ ", cantPersonas=" + cantPersonas + ", politicasDeCancelacion=" + politicasDeCancelacion + "]";
+				+ ", cantPersonas=" + cantPersonas + ", politicasDeCancelacion=" + politicasDeCancelacion + ", agencia="
+				+ agencia + "]";
 	}
-	
 	
 
 }

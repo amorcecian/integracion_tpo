@@ -25,6 +25,11 @@ public class FormasDePago implements Serializable{
 		this.id = id;
 		this.descripcion = descripcion;
 	}
+	
+
+	public FormasDePago() {
+		super();
+	}
 
 	public int getId() {
 		return id;

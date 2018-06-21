@@ -87,8 +87,20 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 	}
     
     
-    public Agencia recuperarAgencia(int id) {
-    	return em.find(Agencia.class, id);    	
+    public AgenciaDTO recuperarAgenciaDTO(int id) {
+    	AgenciaDTO adto = new AgenciaDTO();
+    	Agencia a = em.find(Agencia.class, id); 
+    	
+    	adto.setId(a.getId());
+    	adto.setNombre(a.getNombre());
+    	adto.setDireccion(a.getDireccion());
+    	adto.setEstado(a.getEstado());
+    	
+    	return adto;   	
+    }
+    
+    public Agencia recuperarAgencia(int id) {    	
+    	return em.find(Agencia.class, id); 
     }
     
 

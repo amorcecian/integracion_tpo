@@ -20,10 +20,6 @@ public class Agencia implements Serializable {
 	private String direccion;
 	private String estado;
 	private int idBackOffice;
-	@OneToMany
-	@JoinColumn(name="agencia")
-	private List<Paquete> paquetes;
-	
 
 
 	public int getId() {
@@ -58,13 +54,6 @@ public class Agencia implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<Paquete> getPaquetes() {
-		return paquetes;
-	}
-
-	public void setPaquetes(List<Paquete> paquetes) {
-		this.paquetes = paquetes;
-	}
 
 	public int getIdBackOffice() {
 		return idBackOffice;

@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +29,9 @@ public class TipoServicio implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
-	@OneToMany (mappedBy = "TipoServicio")	
+	
+	@OneToMany (cascade=CascadeType.ALL)	
+	@JoinColumn(name="idTipoServicio")
 	private List<Servicio> servicios;
 	
 	public TipoServicio(int id, String nombre) {
@@ -36,6 +40,16 @@ public class TipoServicio implements Serializable{
 		this.servicios = new ArrayList<Servicio>();
 	}
 	
+
+	
+	public TipoServicio() {
+		super();
+	}
+
+
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -75,10 +89,11 @@ public class TipoServicio implements Serializable{
 		
 		return tsDTO;
 	}
-	
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "TipoServicio [id=" + id + ", nombre=" + nombre + ", servicios=" + servicios + "]";
+	}
+	
+	
 }

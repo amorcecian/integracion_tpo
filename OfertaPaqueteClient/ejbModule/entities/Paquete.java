@@ -18,18 +18,24 @@ public class Paquete implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
+	
 	@ManyToOne
 	@JoinColumn(name="destino")
 	private Destino destino;
+	
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private String estado;
 	private int cupo;
-	private double precioPersona;
+	private Float precioPersona;
+	
+	
 	@ManyToMany(cascade={CascadeType.MERGE})
 	@JoinTable(name="paquete_servicio",joinColumns=@JoinColumn(name="id_paquete"),
 	inverseJoinColumns=@JoinColumn(name="id_servicio"))
 	private List<Servicio> servicios;
+	
+	
 	private String descripcion;
 	private String foto;
 	private int cantPersonas;
@@ -37,6 +43,11 @@ public class Paquete implements Serializable{
 	
 	@OneToMany (mappedBy = "MedioPago")
 	private List<FormasDePago> mediosDePago;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="agencia")
+	private Agencia agencia;
 
 
 	public int getId() {
@@ -108,13 +119,12 @@ public class Paquete implements Serializable{
 		this.cupo = cupo;
 	}
 
-
-	public double getPrecioPersona() {
+	public Float getPrecioPersona() {
 		return precioPersona;
 	}
 
 
-	public void setPrecioPersona(double precioPersona) {
+	public void setPrecioPersona(Float precioPersona) {
 		this.precioPersona = precioPersona;
 	}
 
@@ -166,6 +176,26 @@ public class Paquete implements Serializable{
 
 	public void setPoliticasDeCancelacion(String politicasDeCancelacion) {
 		this.politicasDeCancelacion = politicasDeCancelacion;
+	}
+
+
+	public List<FormasDePago> getMediosDePago() {
+		return mediosDePago;
+	}
+
+
+	public void setMediosDePago(List<FormasDePago> mediosDePago) {
+		this.mediosDePago = mediosDePago;
+	}
+
+
+	public Agencia getAgencia() {
+		return agencia;
+	}
+
+
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 	
 	

@@ -3,6 +3,7 @@ package sessions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,12 +14,17 @@ import com.google.gson.Gson;
 
 import dto.AgenciaDTO;
 import dto.DestinoDTO;
+import dto.FormasDePagoDTO;
 import dto.PaqueteDTO;
 import dto.ServicioDTO;
 import entities.Agencia;
 import entities.Destino;
+import entities.FormasDePago;
 import entities.Paquete;
 import entities.Servicio;
+import json.PaqueteJson;
+import mensajeria.BackOfficeRest;
+import mensajeria.PortalWebQueue;
 
 /**
  * Session Bean implementation class ControladorPaquete
@@ -30,6 +36,14 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 	@PersistenceContext(unitName="MyPU")
 	   private EntityManager em;
 	
+	@EJB
+	ControladorAgencia conAgencias;
+	
+	@EJB
+	PortalWebQueue queuePortal;
+	
+	@EJB
+	BackOfficeRest backOffice;
 
     /**
      * Default constructor. 
@@ -40,6 +54,11 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     
     public void altaPaquete(PaqueteDTO pdto)  {
     	Paquete p = new Paquete();
+    	
+    	System.out.println("ID Agencia: " + pdto.getAgencia().getId());
+    	Agencia a = conAgencias.recuperarAgencia(pdto.getAgencia().getId());
+    	p.setAgencia(a);
+    	
     	p.setNombre(pdto.getNombre());
     	
     	Destino d = new Destino();
@@ -70,10 +89,50 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		pdto.setId(id);
 		
 
-		System.out.println("ID PAQUETE INGRESADO: "+id);   		
+		System.out.println("ID PAQUETE INGRESADO: "+id);   	
+		
+		PaqueteJson pjson = new PaqueteJson();
+		
+		pjson.setId(p.getId());
+		pjson.setNombre(p.getNombre());
+		
+		pjson.setCupo(p.getCupo());
+		pjson.setCantPersonas(p.getCantPersonas());
+		
+		pjson.setFechaDesde(p.getFechaIngreso());
+		pjson.setFechaHasta(p.getFechaSalida());
+		
+		pjson.setDescripcion(p.getDescripcion());		
+		pjson.setPoliticas(p.getPoliticasDeCancelacion());
+		
+		pjson.setPrecio(p.getPrecioPersona());
+		
 
+		List<String> medioPago = new ArrayList<String>();
+		for(FormasDePagoDTO fpdto: pdto.getFormPagos()){
+			String mp = this.recuperarFormadePago(fpdto.getId()).getDescripcion();
+			medioPago.add(mp);
+		}
+		pjson.setMediosDePago(medioPago);
+		
+		
+		List<String> servicios = new ArrayList<String>();
+		for(ServicioDTO sdto: pdto.getServicios()){
+			String s = this.recuperarServicio(sdto.getId()).getNombre();
+			servicios.add(s);
+		}
+		pjson.setServicios(servicios);
+		
+ 		Gson gson = new Gson();
  		
- 		//portalCola.envioPaquete(pdto);
+		String json = gson.toJson(pjson);
+ 		
+ 		System.out.println("Paquete a encolar: " + json);
+		
+		
+  		//queuePortal.encolar(gson.toJson(pjson));
+  		
+  		//backOffice.Loggear(4);
 
     }
     
@@ -154,6 +213,59 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		
 		}
 		return lstPDTO;
+	}
+	
+	public DestinoDTO recuperarDestino (int id) {
+		Destino d = em.find(Destino.class, id);
+		DestinoDTO ddto = new DestinoDTO();
+		
+		ddto.setId(d.getId());
+		ddto.setNombre(d.getNombre());
+		ddto.setLatitud("-38.0172131");
+		ddto.setLongitud("-57.7406177");
+		
+		return ddto;    		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<FormasDePagoDTO> recuperarFormasdePago() {
+		List<FormasDePagoDTO> lfpdto = new ArrayList<FormasDePagoDTO>();
+		
+		List<FormasDePago> lfp;
+		Query q = em.createQuery("SELECT fp FROM FormasDePago fp ");
+		lfp = (List<FormasDePago>) q.getResultList();
+		
+		for(FormasDePago fp: lfp) {
+			FormasDePagoDTO fpdto = new FormasDePagoDTO();
+			fpdto.setId(fp.getId());
+			fpdto.setDescripcion(fp.getDescripcion());
+			lfpdto.add(fpdto);
+		}		
+		
+		return lfpdto;
+	}
+	
+	public FormasDePagoDTO recuperarFormadePago(int id){
+		FormasDePagoDTO fpdto = new FormasDePagoDTO();
+		
+		FormasDePago fp = em.find(FormasDePago.class, id);
+		
+		fpdto.setId(fp.getId());
+		fpdto.setDescripcion(fp.getDescripcion());
+		
+		return fpdto;
+		
+	}
+	
+	public ServicioDTO recuperarServicio(int id) {
+		ServicioDTO sdto = new ServicioDTO();
+		
+		Servicio s = em.find(Servicio.class, id);
+		
+		sdto.setId(s.getId());
+		sdto.setNombre(s.getNombre());
+		
+		return sdto;
 	}
 
 }

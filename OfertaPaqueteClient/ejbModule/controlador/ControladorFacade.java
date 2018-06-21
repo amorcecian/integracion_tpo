@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import dto.AgenciaDTO;
 import dto.DestinoDTO;
+import dto.FormasDePagoDTO;
 import dto.PaqueteDTO;
 import dto.TipoServicioDTO;
 import entities.Agencia;
@@ -50,6 +51,10 @@ public class ControladorFacade implements ControladorFacadeRemote {
 		return conAgencias.recuperarAgencias();		
 	}
 	
+	public AgenciaDTO recuperarAgenciaDTO(int id) {		
+		return conAgencias.recuperarAgenciaDTO(id);		
+	}
+	
 	
 	public List<PaqueteDTO> recuperarPaquetes() {		
 		return conPaquetes.recuperarPaquetes();
@@ -65,6 +70,16 @@ public class ControladorFacade implements ControladorFacadeRemote {
 	
 	public void altaPaquete(PaqueteDTO p) {
 		conPaquetes.altaPaquete(p);
+	}
+	
+	public DestinoDTO recuperarDestino(int id) {
+		return conPaquetes.recuperarDestino(id);
+	}
+
+
+	@Override
+	public List<FormasDePagoDTO> recuperarFormasdePago() {
+		return conPaquetes.recuperarFormasdePago();
 	}
 
 

@@ -11,8 +11,8 @@ public class LogJson implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Date fecha;
-	private String module;
-	private String accion;
+	private int modulo;
+	private int accion;
 	
 	
 	
@@ -21,13 +21,30 @@ public class LogJson implements Serializable{
 	}
 
 
-	public LogJson(Date fecha, String module, String accion) {
+
+	public LogJson(Date fecha, int modulo, int accion) {
 		super();
 		this.fecha = fecha;
-		this.module = module;
+		this.modulo = modulo;
 		this.accion = accion;
 	}
 
+
+	public int getModulo() {
+		return modulo;
+	}
+
+
+	public void setModulo(int modulo) {
+		this.modulo = modulo;
+	}
+	public int getAccion() {
+		return accion;
+	}
+
+	public void setAccion(int accion) {
+		this.accion = accion;
+	}
 
 	public Date getFecha() {
 		return fecha;
@@ -35,18 +52,7 @@ public class LogJson implements Serializable{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public String getModule() {
-		return module;
-	}
-	public void setModule(String module) {
-		this.module = module;
-	}
-	public String getAccion() {
-		return accion;
-	}
-	public void setAccion(String accion) {
-		this.accion = accion;
-	}
+
 	
 	
 

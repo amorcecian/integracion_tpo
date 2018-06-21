@@ -1,3 +1,5 @@
+<%@page import="dto.FormasDePagoDTO"%>
+<%@page import="dto.AgenciaDTO"%>
 <%@page import="dto.DestinoDTO"%>
 <%@page import="dto.ServicioDTO"%>
 <%@page import="dto.TipoServicioDTO"%>
@@ -5,8 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <% 
+List<AgenciaDTO> Agencias = (List<AgenciaDTO>) request.getAttribute("Agencias");
 List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribute("TipoServicios");
 List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
+List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribute("FormasdePago");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,8 +101,27 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 
       <!-- Marketing Icons Section -->
      <div id="page-wrapper">
+     
+     
       
       	<form action="Controlador?action=AltaPaquete" method="post">
+	
+		    <div class="form-group">
+			    <label for="exampleFormControlSelect1">Agencia</label>
+			    <select class="form-control" id="agencia" name="agencia">
+			      <option disabled="disabled" selected="selected"></option>
+       			<%
+				if(Agencias != null ){	
+					for(AgenciaDTO adto:Agencias) {
+				%>
+			      	<option value="<%= adto.getId() %>"><%= adto.getNombre() %></option>
+  				  <% 
+						};
+					};
+			      %>
+			    </select>
+		  	</div>
+      	
 		  <div class="form-group">
 		    <label for="formGroupExampleInput">Nombre</label>
 		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre">
@@ -126,13 +149,13 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Destino</label>
-			    <select class="form-control" name="destino">
+			    <select class="form-control" id="destino" name="destino">
 			      <option disabled="disabled" selected="selected"></option>
        			<%
 				if(Destinos != null ){	
 					for (DestinoDTO ddto : Destinos) {
 				%>
-			      	<option><%= ddto.getNombre() %></option>
+			      	<option value="<%= ddto.getId() %>"><%= ddto.getNombre() %></option>
   				  <% 
 						};
 					};
@@ -158,7 +181,7 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 			      	<%
 			      		for (ServicioDTO sdto : tsdto.getServicios()) {
 					      	%>
-					      	<option><%= sdto.getNombre() %></option>
+					      	<option value="<%= sdto.getId() %>"><%= sdto.getNombre() %></option>
 					      	<%
 		      			};
       				%>
@@ -188,8 +211,15 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 			    <label for="exampleFormControlSelect1">Medios de pago</label>
 			    <select multiple class="form-control" id="exampleFormControlSelect1" name="medioPago" size="3">
 			      <option disabled="disabled" selected="selected"></option>
-			      <option>Efectivo</option>
-			      <option>Tarjeta</option>
+      			<%
+				if(FormasdePago != null ){	
+					for (FormasDePagoDTO fpdto : FormasdePago) {
+				%>
+			      <option value="<%= fpdto.getId() %>"><%= fpdto.getDescripcion() %></option>
+   				  <% 
+						};
+					};
+			      %>
 			    </select>
 		  	</div>
 		  	
@@ -203,7 +233,7 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
 			    <label for="exampleFormControlSelect1">Estado</label>
 			    <select class="form-control" id="exampleFormControlSelect1" name="estado">
 			      <option disabled="disabled" selected="selected"></option>
-			      <option>Activo</option>
+			      <option>Activo</option>			      
 			      <option>Inactivo</option>
 			    </select>
 		  	</div>
@@ -236,6 +266,7 @@ List<DestinoDTO> Destinos = (List<DestinoDTO>) request.getAttribute("Destinos");
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
     
 
   </body>

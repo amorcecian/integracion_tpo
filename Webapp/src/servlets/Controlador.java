@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import controlador.ControladorFacadeRemote;
 import dto.AgenciaDTO;
 import dto.DestinoDTO;
+import dto.FormasDePagoDTO;
 import dto.PaqueteDTO;
+import dto.ServicioDTO;
 import dto.TipoServicioDTO;
 
 /**
@@ -123,11 +126,17 @@ public class Controlador extends HttpServlet {
 					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
 		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
 					
+					List<AgenciaDTO> ladto= cFacade.recuperarAgencias();
+					request.setAttribute("Agencias", ladto);
+					
 					List<TipoServicioDTO> ltsdto= cFacade.recuperarServicios();
 					request.setAttribute("TipoServicios", ltsdto);
 					
 					List<DestinoDTO> lddto = cFacade.recuperarDestinos();
 					request.setAttribute("Destinos", lddto);
+					
+					List<FormasDePagoDTO> lfpdto = cFacade.recuperarFormasdePago();
+					request.setAttribute("FormasdePago", lfpdto);
 	
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -137,6 +146,8 @@ public class Controlador extends HttpServlet {
 	    		
 	    	}
 	    	case("AltaPaquete"):{
+	    		
+	    		String agencia = request.getParameter("agencia");
 	            String nombre = request.getParameter("nombre");
 	            String fechaSalida = request.getParameter("fechaSalida");
 	            String fechaRegreso = request.getParameter("fechaRegreso");
@@ -147,24 +158,37 @@ public class Controlador extends HttpServlet {
 	            String destino = request.getParameter("destino");
 	            String descripcion = request.getParameter("descripcion");
 	            
-	            String servicios = request.getParameter("servicios");
+  				String[] servicios = (String[]) request.getParameterValues("servicios");
 	            String imagen = request.getParameter("imagen");
 	            String precio = request.getParameter("precio");
 	            
-	            String medioPago = request.getParameter("medioPago");
+				String[] medioPago = (String[]) request.getParameterValues("medioPago");
 	            String politicas = request.getParameter("politicas");
 	            String estado = request.getParameter("estado");
 	            
+
+				
+	            
 	            
 				try {
+					
 					context = new InitialContext(jndiProperties);
 					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
 		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
 					
+					
 					PaqueteDTO pdto = new PaqueteDTO();
+					
+					AgenciaDTO adto = new AgenciaDTO();
+					adto.setId(Integer.valueOf(agencia));
+					pdto.setAgencia(adto);					
+					
 					pdto.setNombre(nombre);
 					
-					//Buscar Destino en BD					
+					DestinoDTO ddto = new DestinoDTO();
+					ddto.setId(Integer.valueOf(destino));
+					pdto.setDestino(ddto);
+									
 
 					DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 					Date date1 = (Date) sourceFormat.parse(fechaRegreso);					
@@ -179,17 +203,35 @@ public class Controlador extends HttpServlet {
 					pdto.setCupo(Integer.parseInt(cupo));
 					pdto.setCantPersonas(Integer.parseInt(cantPersonas));
 					
-					//Falta lista de Servicios
-					pdto.setPrecioPersona(Double.parseDouble(precio));
+
+					List<ServicioDTO> lsdto = new ArrayList<ServicioDTO>();
+					for(String s: servicios){
+						ServicioDTO sdto = new ServicioDTO();
+						sdto.setId(Integer.valueOf(s));
+						lsdto.add(sdto);
+					}
+					pdto.setServicios(lsdto);
+					
+					List<FormasDePagoDTO> medios = new ArrayList<FormasDePagoDTO>();
+					for(String mp: medioPago){
+						FormasDePagoDTO mpdto = new FormasDePagoDTO();
+						mpdto.setId(Integer.valueOf(mp));
+						medios.add(mpdto);
+					}
+					pdto.setFormPagos(medios);
+					
+					pdto.setPrecioPersona(Float.parseFloat(precio));
 					pdto.setDescripcion(descripcion);
 					pdto.setFoto(imagen);
 					pdto.setPoliticasDeCancelacion(politicas);
 					
 
+
 					System.out.println("Paquete: " + pdto.toString());
 					
 					cFacade.altaPaquete(pdto);
-					
+			        
+			        
 					List<PaqueteDTO> lpdto= cFacade.recuperarPaquetes();
 					request.setAttribute("paquetes", lpdto);
 					

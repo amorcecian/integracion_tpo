@@ -19,6 +19,8 @@ import java.util.Properties;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
@@ -45,6 +47,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
     Properties prop = new Properties();
     InputStream input = null;
     
+	@PersistenceContext(unitName="MyPU")
+	   private EntityManager em;
+	
     @EJB
     ControladorAgencia cAgencia;
 
@@ -118,7 +123,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		
 		cAgencia.actualizarAgencia(a);
 		*/
-		Loggear("Alta de la agencia: " + a.getNombre() + "con dirección: " + a.getDireccion() + ", IdBackOffice: " + a.getIdBackOffice());
+		Loggear(3);
 	
 	
 		} catch (Exception e) {			
@@ -128,7 +133,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
     	
     }
     
-  	public void Loggear (String accion) {
+  	public void Loggear (int accion) {
   		
   		try {
   	        input = new FileInputStream("config.properties");
@@ -151,10 +156,10 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		  	 */
 
 	  		Date fecha = new Date();
-  		  	String module = "OP";
+  		  	int modulo = 2;
   		  	
   		  	
-  		  	LogJson log = new LogJson(fecha,module,accion);
+  		  	LogJson log = new LogJson(fecha,modulo,accion);
   		  	
   			Gson gson = new Gson();
   			
@@ -255,8 +260,11 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 	 				ServicioDTO sdto = s.toDTO(s);
 	 				lsdto.add(sdto);
 	 			}
+	 			System.out.println("Servicio: " + ts.toString());
 	 			tsdto.setServicios(lsdto);
 	 			listtsdto.add(tsdto);
+	 			em.merge(ts);
+	 			em.flush();
 	 		}
 	 		
   			

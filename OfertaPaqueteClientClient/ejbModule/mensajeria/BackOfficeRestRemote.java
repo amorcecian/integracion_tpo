@@ -12,7 +12,7 @@ public interface BackOfficeRestRemote {
 	
 	 public void envioAgenciaBackoffice (AgenciaDTO adto);
 	 
-	 public void Loggear (String accion);
+	 public void Loggear (int accion);
   	
 	 public List<TipoServicioDTO> obtenerServicios();
 

@@ -18,8 +18,7 @@ public class Servicio implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
-	@ManyToOne
-	private TipoServicio TipoServicio;
+
 	
 	
 	public Servicio(int id, String nombre) {
@@ -27,6 +26,13 @@ public class Servicio implements Serializable{
 		this.id = id;
 		this.nombre = nombre;
 	}
+
+
+
+	public Servicio() {
+		super();
+	}
+
 
 
 	public int getId() {
@@ -48,15 +54,6 @@ public class Servicio implements Serializable{
 		this.nombre = nombre;
 	}
 
-
-	public TipoServicio getTipoServicio() {
-		return TipoServicio;
-	}
-
-
-	public void setTipoServicio(TipoServicio tipoServicio) {
-		TipoServicio = tipoServicio;
-	}
 	
 	public ServicioDTO toDTO (Servicio s) {
 		ServicioDTO sdto = new ServicioDTO();
@@ -66,7 +63,13 @@ public class Servicio implements Serializable{
 		
 		return sdto;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return "Servicio [id=" + id + ", nombre=" + nombre + "]";
+	}
+
 	
 
 }

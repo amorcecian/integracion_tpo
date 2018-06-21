@@ -15,6 +15,7 @@ public class AgenciaDTO implements Serializable {
 	private String Direccion;
 	private String Estado;
 	private List<PaqueteDTO> paquetes;
+	
 	public Integer getId() {
 		return Id;
 	}
