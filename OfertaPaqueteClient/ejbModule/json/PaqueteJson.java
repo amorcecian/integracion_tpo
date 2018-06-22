@@ -12,13 +12,13 @@ public class PaqueteJson implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
-	private CiudadJson ciudadDestino;
+	private String ciudadDestino;
 	private int cupo;
 	private int cantPersonas;
-	private AgenciaJson agencia;
+	private AgenciaJsonQueue agencia;
 	private String foto;
-	private Date fechaDesde;
-	private Date fechaHasta;
+	private String fechaDesde;
+	private String fechaHasta;
 	private String estado;
 	private float precio;
 	private String descripcion;
@@ -39,10 +39,10 @@ public class PaqueteJson implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public CiudadJson getCiudadDestino() {
+	public String getCiudadDestino() {
 		return ciudadDestino;
 	}
-	public void setCiudadDestino(CiudadJson ciudadDestino) {
+	public void setCiudadDestino(String ciudadDestino) {
 		this.ciudadDestino = ciudadDestino;
 	}
 	public int getCupo() {
@@ -57,10 +57,10 @@ public class PaqueteJson implements Serializable {
 	public void setCantPersonas(int cantPersonas) {
 		this.cantPersonas = cantPersonas;
 	}
-	public AgenciaJson getAgencia() {
+	public AgenciaJsonQueue getAgencia() {
 		return agencia;
 	}
-	public void setAgencia(AgenciaJson agencia) {
+	public void setAgencia(AgenciaJsonQueue agencia) {
 		this.agencia = agencia;
 	}
 	public String getFoto() {
@@ -69,16 +69,16 @@ public class PaqueteJson implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	public Date getFechaDesde() {
+	public String getFechaDesde() {
 		return fechaDesde;
 	}
-	public void setFechaDesde(Date fechaDesde) {
+	public void setFechaDesde(String fechaDesde) {
 		this.fechaDesde = fechaDesde;
 	}
-	public Date getFechaHasta() {
+	public String getFechaHasta() {
 		return fechaHasta;
 	}
-	public void setFechaHasta(Date fechaHasta) {
+	public void setFechaHasta(String fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
 	public String getEstado() {

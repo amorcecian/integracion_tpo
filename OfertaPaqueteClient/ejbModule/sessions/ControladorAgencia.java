@@ -95,6 +95,7 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
     	adto.setNombre(a.getNombre());
     	adto.setDireccion(a.getDireccion());
     	adto.setEstado(a.getEstado());
+    	adto.setIdBackOffice(a.getIdBackOffice());
     	
     	return adto;   	
     }
@@ -124,6 +125,7 @@ public class ControladorAgencia implements ControladorAgenciaRemote {
 			adto.setNombre(a.getNombre());
 			adto.setDireccion(a.getDireccion());
 			adto.setEstado(a.getEstado());
+			adto.setIdBackOffice(a.getIdBackOffice());
 			lstADTO.add(adto);			
 		}
 		return lstADTO;

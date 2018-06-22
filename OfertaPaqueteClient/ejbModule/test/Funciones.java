@@ -52,7 +52,7 @@ public abstract class Funciones {
 		
 		System.out.println("Nombre de la agencia: " + a.getNombre());
 		
-		int idBackoffice = 3;
+		String idBackoffice = "AG-4543";
 		
 		return json.toJson(idBackoffice);		
 		

@@ -14,7 +14,8 @@ public class AgenciaDTO implements Serializable {
 	private String Nombre;
 	private String Direccion;
 	private String Estado;
-	private List<PaqueteDTO> paquetes;
+	private String idBackOffice;
+
 	
 	public Integer getId() {
 		return Id;
@@ -40,11 +41,12 @@ public class AgenciaDTO implements Serializable {
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
-	public List<PaqueteDTO> getPaquetes() {
-		return paquetes;
+	public String getIdBackOffice() {
+		return idBackOffice;
 	}
-	public void setPaquetes(List<PaqueteDTO> paquetes) {
-		this.paquetes = paquetes;
+	public void setIdBackOffice(String idBackOffice) {
+		this.idBackOffice = idBackOffice;
 	}
+	
 
 }

@@ -108,7 +108,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 	
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Agencia</label>
-			    <select class="form-control" id="agencia" name="agencia">
+			    <select class="form-control" id="agencia" name="agencia" required>
 			      <option disabled="disabled" selected="selected"></option>
        			<%
 				if(Agencias != null ){	
@@ -149,7 +149,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Destino</label>
-			    <select class="form-control" id="destino" name="destino">
+			    <select class="form-control" id="destino" name="destino" required>
 			      <option disabled="disabled" selected="selected"></option>
        			<%
 				if(Destinos != null ){	
@@ -171,8 +171,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  
    		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Servicios</label>
-			    <select multiple class="form-control" name="servicios" id="servicios" size="8">
-			      <option disabled="disabled" selected="selected"></option>			      
+			    <select multiple class="form-control" name="servicios" id="servicios" size="8" required>		      
       			<%
 				if(TipoServicios != null ){	
 					for (TipoServicioDTO tsdto : TipoServicios) {
@@ -198,7 +197,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 
 		  <div class="form-group">
 		    <label for="file">Cargar imagen</label>
-		    <input type="file" name="file" class="form-control-file">
+		    <input type="file" name="file" class="form-control-file" required>
 		  </div>
 
 
@@ -210,8 +209,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  
    		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Medios de pago</label>
-			    <select multiple class="form-control" id="exampleFormControlSelect1" name="medioPago" size="3">
-			      <option disabled="disabled" selected="selected"></option>
+			    <select multiple class="form-control" id="exampleFormControlSelect1" name="medioPago" size="3" required>
       			<%
 				if(FormasdePago != null ){	
 					for (FormasDePagoDTO fpdto : FormasdePago) {
@@ -232,7 +230,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 
 		    <div class="form-group">
 			    <label for="exampleFormControlSelect1">Estado</label>
-			    <select class="form-control" id="exampleFormControlSelect1" name="estado">
+			    <select class="form-control" id="exampleFormControlSelect1" name="estado" required>
 			      <option disabled="disabled" selected="selected"></option>
 			      <option>Activo</option>			      
 			      <option>Inactivo</option>

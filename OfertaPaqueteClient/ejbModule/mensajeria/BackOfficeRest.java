@@ -32,6 +32,7 @@ import dto.TipoServicioDTO;
 import entities.Agencia;
 import entities.Servicio;
 import entities.TipoServicio;
+import json.AgenciaJson;
 import json.LogJson;
 import sessions.ControladorAgencia;
 import test.Funciones;
@@ -59,26 +60,27 @@ public class BackOfficeRest implements BackOfficeRestRemote {
     }
     
     public void envioAgenciaBackoffice (AgenciaDTO adto) {
-		try {
+		
+    	try {
         
 	  	Agencia a = cAgencia.recuperarAgencia(adto.getId());
+	  	
+		AgenciaJson ajson = new AgenciaJson();
+		ajson.setNombre(a.getNombre());
+		ajson.setDireccion(a.getDireccion());
+		ajson.setTipo(2);
+	  	
+	  	Gson gson = new Gson();		
+		String sajson = gson.toJson(ajson);		
+ 		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(sajson));
 
     	
         /*
-		URL url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud");
+		URL url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/Solicitud/EnviarSolicitud");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
 	  	urlConnection.setRequestProperty("Content-Type","application/json");
-	  
-	  	
-	  	Agencia a = cAgencia.recuperarAgencia(adto.getId());
-	  	
-		Gson gson = new Gson();
-		
-		String aJson = gson.toJson(a);
-		
- 		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(a));
  		
  		
 	 	DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
@@ -108,14 +110,29 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		
 		
 		
-		int idBackoffice = gson.fromJson(response.toString(), Integer.class);
+		String idBackoffice = gson.fromJson(response.toString(), String.class);
  		System.out.println("Id del backoffice: " + idBackoffice );
 		 		
 		a.setIdBackOffice(idBackoffice);
 		
 		cAgencia.actualizarAgencia(a);
+		
+		*
 		*/
-		Loggear(3);
+		Loggear(1);
+		
+	  	
+	  	
+	  	//INICIO TEST
+		  	String idBackoffice = gson.fromJson(Funciones.altaAgencia(sajson), String.class);
+	 		System.out.println("Id del backoffice: " + idBackoffice );
+			 		
+			a.setIdBackOffice(idBackoffice);
+			
+			cAgencia.actualizarAgencia(a);
+	  	
+	  	
+	  	//FIN TEST
 	
 	
 		} catch (Exception e) {			
@@ -137,16 +154,23 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		  	urlConnection.setRequestProperty("Content-Type","application/json");
   		  	
   		  	/*
+  		  	//Ejemplo datetime format
 	  	 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
 			System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
   		  	 */
 
-	  		Date fecha = new Date();
-  		  	int modulo = 2;
+	  		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+  		  	String fjson = dateFormat.format(date);
+			int modulo = 2;
   		  	
   		  	
-  		  	LogJson log = new LogJson(fecha,modulo,accion);
+  		  	LogJson log = new LogJson();
+  		  	log.setModulo(modulo);
+  		  	log.setAccion(accion);
+  		  	log.setFecha(fjson);
+  		  	
   		  	
   			Gson gson = new Gson();
   			
@@ -213,8 +237,8 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 			//print result
 	 		System.out.println(response.toString());
 			
-			Gson gson = new Gson();			
-	 		ServicioJson sj = gson.fromJson(response.toString(), ServicioJson.class);
+			//Gson gson = new Gson();			
+	 		//ServicioJson sj = gson.fromJson(response.toString(), ServicioJson.class);
 	 		
 	 		*/
 	 		

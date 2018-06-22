@@ -96,7 +96,9 @@
 			  <div class="card-body">
 			    <h5 class="card-title">Agencias</h5>
 			    <p class="card-text">Lo mejor en Agencias de viajes en Buenos Aires</p>
+   			    <div align="center">
 			    <a href="Controlador?action=ListarAgencias" class="btn btn-primary">Ingresar</a>
+			    </div>
 			  </div>
 			</div>
 	      </div>
@@ -109,7 +111,9 @@
 			  <div class="card-body">
 			    <h5 class="card-title">Paquetes</h5>
 			    <p class="card-text">Los mejores paquetes turísticos a todo el mundo están en tuvago. Descubrí los mejores paquetes al mejor precio.</p>
+			    <div align="center">
 			    <a href="Controlador?action=ListarPaquetes" class="btn btn-primary">Ingresar</a>
+			    </div>
 			  </div>
 			</div>
 	      </div>

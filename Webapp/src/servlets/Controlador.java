@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -9,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -157,6 +160,7 @@ public class Controlador extends HttpServlet {
 	    		
 	    	}
 	    	case("AltaPaquete"):{
+				PaqueteDTO pdto = new PaqueteDTO();
 	    		
 	    		String agencia = request.getParameter("agencia");
 	            String nombre = request.getParameter("nombre");
@@ -171,7 +175,7 @@ public class Controlador extends HttpServlet {
 	            
   				String[] servicios = (String[]) request.getParameterValues("servicios");
 	            
-  		 		String imagen = UploadFile(request, response);
+  		 		String imagen = UploadFile(request, response , pdto);
   		 		
 
 	            String precio = request.getParameter("precio");
@@ -191,7 +195,7 @@ public class Controlador extends HttpServlet {
 		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
 					
 					
-					PaqueteDTO pdto = new PaqueteDTO();
+
 					
 					AgenciaDTO adto = new AgenciaDTO();
 					adto.setId(Integer.valueOf(agencia));
@@ -236,7 +240,9 @@ public class Controlador extends HttpServlet {
 					
 					pdto.setPrecioPersona(Float.parseFloat(precio));
 					pdto.setDescripcion(descripcion);
-					pdto.setFoto(imagen);
+					
+
+					pdto.setFoto("http://10.1.5.15:8080/Webapp/uploads/" + imagen);
 					pdto.setPoliticasDeCancelacion(politicas);
 					
 
@@ -257,6 +263,23 @@ public class Controlador extends HttpServlet {
 	    		jspPage = "paquetes.jsp";
 	            break;
 	    	}
+	    	case("Inicio"):{    	    
+				try {
+					context = new InitialContext(jndiProperties);
+					ControladorFacadeRemote cFacade = (ControladorFacadeRemote) context 		 
+		    	            .lookup("ejb:OfertaPaqueteServicio/OfertaPaqueteClient//ControladorFacade!controlador.ControladorFacadeRemote");
+					
+					List<PaqueteDTO> lpdto= cFacade.recuperarPaquetes();
+					request.setAttribute("paquetes", lpdto);
+	
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	    		jspPage = "index.jsp";
+	            break;
+	    		
+	    	}
+	    	
     	
     	//FIN SWITCH
     	}
@@ -275,16 +298,24 @@ public class Controlador extends HttpServlet {
     }
     
     
-	private String UploadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private String UploadFile(HttpServletRequest request, HttpServletResponse response, PaqueteDTO pdto) throws ServletException, IOException {
 	    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 
 	    
 	    //PC del laburo
-	    //String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent";
+	    String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent/uploads/";
 	    //Notebook
-	    String path="C:/Users/VM7/Desktop/TPO IA/integracion_tpo/Webapp/WebContent/uploads/";
+	    //String path="C:/Users/VM7/Desktop/TPO IA/integracion_tpo/Webapp/WebContent/uploads/";
 	    
+	    /*
+	    //URL para pegarle desde afuera: http://10.1.5.15:8080/Webapp/uploads/test.jpg 
+	    //Config JBOSS:
+		<location name="/Webapp/uploads" handler="images-uploads" />
+		
+		<file name="images-uploads" path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent/uploads" directory-listing="true"/>
+	    
+	    */
 	    File uploads = new File(path); //Carpeta donde se guardan los archivos
 	    //uploads.mkdirs(); //Crea los directorios necesarios
 	    File file = File.createTempFile("Paquete-", "-"+fileName, uploads); //Evita que hayan dos archivos con el mismo nombre
@@ -299,9 +330,30 @@ public class Controlador extends HttpServlet {
 	    //String a = file.getName().substring(45, i-1);
 	    String a = file.getName();
 	    
+	    String base64ImageString = encoder(file.toString());
+	    
+	    //System.out.println("Base64: " + base64ImageString);
+	    
+	    pdto.setFotoBase64(base64ImageString);
 	    
 	    uploads = null;
-	    return a;
+	    return a; //Si quiero devolver la url de la imagen
+	}
+	
+	public static String encoder(String imagePath) {
+		String base64Image = "";
+		File file = new File(imagePath);
+		try (FileInputStream imageInFile = new FileInputStream(file)) {
+			// Reading a Image file from file system
+			byte imageData[] = new byte[(int) file.length()];
+			imageInFile.read(imageData);
+			base64Image = Base64.getEncoder().encodeToString(imageData);
+		} catch (FileNotFoundException e) {
+			System.out.println("Image not found" + e);
+		} catch (IOException ioe) {
+			System.out.println("Exception while reading the Image " + ioe);
+		}
+		return base64Image;
 	}
 	
 	

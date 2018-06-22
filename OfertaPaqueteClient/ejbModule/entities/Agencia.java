@@ -19,7 +19,7 @@ public class Agencia implements Serializable {
 	private String nombre;
 	private String direccion;
 	private String estado;
-	private int idBackOffice;
+	private String idBackOffice;
 
 
 	public int getId() {
@@ -54,14 +54,12 @@ public class Agencia implements Serializable {
 		this.estado = estado;
 	}
 
-
-	public int getIdBackOffice() {
+	public String getIdBackOffice() {
 		return idBackOffice;
 	}
 
-	public void setIdBackOffice(int idBackOffice) {
+	public void setIdBackOffice(String idBackOffice) {
 		this.idBackOffice = idBackOffice;
 	}
-	
 	
 }

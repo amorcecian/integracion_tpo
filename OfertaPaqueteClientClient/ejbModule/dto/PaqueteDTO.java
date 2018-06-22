@@ -19,6 +19,7 @@ public class PaqueteDTO implements Serializable {
 	private List<ServicioDTO> servicios;
 	private String descripcion;
 	private String foto;
+	private String fotoBase64; 
 	private int cantPersonas;
 	private String politicasDeCancelacion;
 	private AgenciaDTO agencia;
@@ -110,13 +111,17 @@ public class PaqueteDTO implements Serializable {
 	public void setAgencia(AgenciaDTO agencia) {
 		this.agencia = agencia;
 	}
-	
-	
 	public List<FormasDePagoDTO> getFormPagos() {
 		return formPagos;
 	}
 	public void setFormPagos(List<FormasDePagoDTO> formPagos) {
 		this.formPagos = formPagos;
+	}
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
 	}
 	@Override
 	public String toString() {

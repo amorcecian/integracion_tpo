@@ -1,7 +1,12 @@
 package sessions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -22,6 +27,7 @@ import entities.Destino;
 import entities.FormasDePago;
 import entities.Paquete;
 import entities.Servicio;
+import json.AgenciaJsonQueue;
 import json.PaqueteJson;
 import mensajeria.BackOfficeRest;
 import mensajeria.PortalWebQueue;
@@ -67,6 +73,8 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     	d.setNombre(pdto.getDestino().getNombre());
     	p.setDestino(d);
     	
+    	
+    	//Convierto Fecha al fomato correcto AAAA-MM-DD
     	p.setFechaIngreso(pdto.getFechaIngreso());
     	p.setFechaSalida(pdto.getFechaSalida());
     	
@@ -84,7 +92,6 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 			lstsjson.add(ss);
 			ltss.add(s);
 		}
-		pjson.setServicios(lstsjson);
 		p.setServicios(ltss);
 
     	
@@ -101,7 +108,6 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 			lstfp.add(fp);
 			medioPago.add(mp);
 		}
-		pjson.setMediosDePago(medioPago);
 		p.setMediosDePago(lstfp);
     	
     	em.persist(p);
@@ -120,16 +126,32 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		pjson.setId(p.getId());
 		pjson.setNombre(p.getNombre());
 		
+		pjson.setCiudadDestino(p.getDestino().getNombre());		
+		
 		pjson.setCupo(p.getCupo());
 		pjson.setCantPersonas(p.getCantPersonas());
 		
-		pjson.setFechaDesde(p.getFechaIngreso());
-		pjson.setFechaHasta(p.getFechaSalida());
+		AgenciaJsonQueue ajsonq = new AgenciaJsonQueue();
+		ajsonq.setId(a.getIdBackOffice());
+		ajsonq.setNombre(a.getNombre());
+		ajsonq.setDireccion(a.getDireccion());
+		pjson.setAgencia(ajsonq);
+		
+		pjson.setFoto(pdto.getFotoBase64());  //Envio la foto en Base64	  	
+		
+		pjson.setFechaDesde(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaIngreso()));		
+		pjson.setFechaHasta(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaSalida()));
+
 		
 		pjson.setDescripcion(p.getDescripcion());		
-		pjson.setPoliticas(p.getPoliticasDeCancelacion());
+		pjson.setEstado(p.getEstado());
 		
 		pjson.setPrecio(p.getPrecioPersona());
+		pjson.setPoliticas(p.getPoliticasDeCancelacion());
+		
+		pjson.setServicios(lstsjson);
+		pjson.setMediosDePago(medioPago);
+
 		
  		Gson gson = new Gson();
  		
@@ -140,7 +162,7 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		
   		//queuePortal.encolar(gson.toJson(pjson));
   		
-  		//backOffice.Loggear(4);
+  		backOffice.Loggear(2);
 
     }
     

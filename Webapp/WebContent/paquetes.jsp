@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -116,8 +117,10 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
   			<%
 			if(paquetes != null ){	
 				for (PaqueteDTO p : paquetes) {
+					Gson gson = new Gson();
+					String json = gson.toJson(p);
 			%>
-		    <tr>
+		    <tr data-toggle="modal" data-target="#exampleModal" class="open-Dialog" data-button="<%=json %>">
 		      <td><%= p.getNombre() %></td>
 		      <td><%= p.getDestino().getNombre() %></td>
 		      <td><%= p.getFechaSalida() %></td>
@@ -134,6 +137,28 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 		</table>        
       </div>
       <!-- /.row -->
+      
+      <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Paquete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     	 <p>some content</p>
+        <input type="text" name="bookId" id="bookId" value=""/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <!--End Modal -->
       
    		<div align="right">
 			<a href="index.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Volver</a>
@@ -158,6 +183,26 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="text/javascript">
+
+
+	    $(document).ready(function () 
+		{
+	    	
+	    	$(document).on("click", ".open-Dialog", function () {	    		
+	    		var id = $(this).attr('data-button').id;
+	    		alert(id);
+	    		//console.log(var x = $(this).attr('data-button'));
+	    		//var obj = jQuery.parseJSON('{"id":3,"nombre":"Test","destino":{"id":12210,"nombre":"9 de Abril"},"fechaIngreso":"Feb 2, 2018 12:00:00 AM","fechaSalida":"Feb 2, 2018 12:00:00 AM","estado":"Activo","cupo":5,"precioPersona":2000.0,"servicios":[{"id":11,"nombre":"Bar"},{"id":21,"nombre":"Casino"}],"descripcion":"Test","foto":"http://10.1.5.15:8080/Webapp/uploads/Paquete-1730183718163334036-descarga.jpg","cantPersonas":2,"politicasDeCancelacion":"Test"}');
+	    		//alert(obj.id);
+	    		
+	    	});
+	    	
+	    	
+	    });
+   
+    </script>
 
   </body>
 
