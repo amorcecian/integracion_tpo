@@ -83,43 +83,39 @@
     <!-- Page Content -->
     <div class="container">
 
-      <h1 class="my-4">Paquetes</h1>
+      <h1 class="my-4">Bienvenido</h1>
 
       <!-- Marketing Icons Section -->
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Paquete 1</h4>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Ver detalle</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Paquete 2</h4>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Ver detalle</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Paquete 3</h4>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Ver detalle</a>
-            </div>
-          </div>
-        </div>
+      <div class="row justify-content-center">
+	      
+	      <div class="col-lg-4 mb-4">
+	     	<div class="card" style="width: 18rem;height: 25rem">
+			  <a href="Controlador?action=ListarAgencias">
+			  <img class="card-img-top" src="images/agencias.png" alt="Agencias">
+			  </a>
+			  <div class="card-body">
+			    <h5 class="card-title">Agencias</h5>
+			    <p class="card-text">Lo mejor en Agencias de viajes en Buenos Aires</p>
+			    <a href="Controlador?action=ListarAgencias" class="btn btn-primary">Ingresar</a>
+			  </div>
+			</div>
+	      </div>
+	      
+   	      <div class="col-lg-4 mb-4">
+	     	<div class="card" style="width: 18rem; height: 25rem">
+			  <a href="Controlador?action=ListarPaquetes">
+			  	<img class="card-img-top" src="images/paquetes.png" alt="Paquetes">
+		  		</a>
+			  <div class="card-body">
+			    <h5 class="card-title">Paquetes</h5>
+			    <p class="card-text">Los mejores paquetes turísticos a todo el mundo están en tuvago. Descubrí los mejores paquetes al mejor precio.</p>
+			    <a href="Controlador?action=ListarPaquetes" class="btn btn-primary">Ingresar</a>
+			  </div>
+			</div>
+	      </div>
+	      
+        
+        
       </div>
       <!-- /.row -->
 

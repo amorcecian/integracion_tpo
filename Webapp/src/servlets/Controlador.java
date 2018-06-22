@@ -280,9 +280,10 @@ public class Controlador extends HttpServlet {
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 
 	    
-	    
-	    //String path="C:/Users/DANIEL/workspace7/OPaqWeb/WebContent";
-	    String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent";
+	    //PC del laburo
+	    //String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent";
+	    //Notebook
+	    String path="C:/Users/VM7/Desktop/TPO IA/integracion_tpo/Webapp/WebContent/uploads/";
 	    
 	    File uploads = new File(path); //Carpeta donde se guardan los archivos
 	    //uploads.mkdirs(); //Crea los directorios necesarios
