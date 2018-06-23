@@ -112,7 +112,7 @@
       <!-- /.row -->
       
    		<div align="right">
-   			 <a href="agencias.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+   			 <a href="Controlador?action=ListarAgencias" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
 	    	 <input type="submit" class="btn btn-secondary" value="Grabar">
 	    </div>
 	    

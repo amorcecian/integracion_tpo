@@ -13,7 +13,7 @@ public class LogJson implements Serializable{
 
 	private int modulo;
 	private int accion;
-	private String fecha;
+	private Long fecha;
 	
 
 	public int getModulo() {
@@ -28,12 +28,13 @@ public class LogJson implements Serializable{
 	public void setAccion(int accion) {
 		this.accion = accion;
 	}
-	public String getFecha() {
+	public Long getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Long fecha) {
 		this.fecha = fecha;
 	}
+
 
 
 }

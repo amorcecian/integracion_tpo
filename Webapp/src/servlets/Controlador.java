@@ -175,7 +175,7 @@ public class Controlador extends HttpServlet {
 	            
   				String[] servicios = (String[]) request.getParameterValues("servicios");
 	            
-  		 		String imagen = UploadFile(request, response , pdto);
+  		 		String imagen = UploadFile(request, response );
   		 		
 
 	            String precio = request.getParameter("precio");
@@ -242,7 +242,7 @@ public class Controlador extends HttpServlet {
 					pdto.setDescripcion(descripcion);
 					
 
-					pdto.setFoto("http://10.1.5.15:8080/Webapp/uploads/" + imagen);
+					pdto.setFoto(imagen);
 					pdto.setPoliticasDeCancelacion(politicas);
 					
 
@@ -298,15 +298,15 @@ public class Controlador extends HttpServlet {
     }
     
     
-	private String UploadFile(HttpServletRequest request, HttpServletResponse response, PaqueteDTO pdto) throws ServletException, IOException {
+	private String UploadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 
 	    
 	    //PC del laburo
-	    String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent/uploads/";
+	    //String path="C:/APHLocal/lucas.campilongo/Desktop/IA/integracion_tpo/Webapp/WebContent/uploads/";
 	    //Notebook
-	    //String path="C:/Users/VM7/Desktop/TPO IA/integracion_tpo/Webapp/WebContent/uploads/";
+	    String path="C:/Users/VM7/Desktop/TPO IA/integracion_tpo/Webapp/WebContent/uploads/";
 	    
 	    /*
 	    //URL para pegarle desde afuera: http://10.1.5.15:8080/Webapp/uploads/test.jpg 
@@ -332,12 +332,12 @@ public class Controlador extends HttpServlet {
 	    
 	    String base64ImageString = encoder(file.toString());
 	    
-	    //System.out.println("Base64: " + base64ImageString);
+	    System.out.println("Base64: " + base64ImageString);
 	    
-	    pdto.setFotoBase64(base64ImageString);
 	    
 	    uploads = null;
-	    return a; //Si quiero devolver la url de la imagen
+	    //return a; //Si quiero devolver la url de la imagen
+	    return base64ImageString;
 	}
 	
 	public static String encoder(String imagePath) {

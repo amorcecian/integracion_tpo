@@ -242,7 +242,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 	      <!-- /.row -->
 	      
 	   		<div align="right">
-	   			 <a href="paquetes.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+	   			 <a href="Controlador?action=ListarPaquetes" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
 		    	 <button type="submit" class="btn btn-secondary">Grabar</button>
 		    </div>
 	

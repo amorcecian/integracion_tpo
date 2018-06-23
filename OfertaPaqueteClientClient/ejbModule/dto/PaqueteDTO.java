@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
 public class PaqueteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,11 +20,11 @@ public class PaqueteDTO implements Serializable {
 	private List<ServicioDTO> servicios;
 	private String descripcion;
 	private String foto;
-	private String fotoBase64; 
 	private int cantPersonas;
 	private String politicasDeCancelacion;
 	private AgenciaDTO agencia;
 	
+
 	private List<FormasDePagoDTO> formPagos;
 	
 	public int getId() {
@@ -116,12 +117,6 @@ public class PaqueteDTO implements Serializable {
 	}
 	public void setFormPagos(List<FormasDePagoDTO> formPagos) {
 		this.formPagos = formPagos;
-	}
-	public String getFotoBase64() {
-		return fotoBase64;
-	}
-	public void setFotoBase64(String fotoBase64) {
-		this.fotoBase64 = fotoBase64;
 	}
 	@Override
 	public String toString() {

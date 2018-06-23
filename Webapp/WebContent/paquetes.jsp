@@ -1,7 +1,8 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="org.jboss.resteasy.util.DateUtil"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="dto.PaqueteDTO"%>
 <%@page import="java.util.List"%>
@@ -117,14 +118,20 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
   			<%
 			if(paquetes != null ){	
 				for (PaqueteDTO p : paquetes) {
+					String sfs = p.getFechaSalida().toString();
+					String sfsf= sfs.substring(0,10);
+					
+					String sfr = p.getFechaSalida().toString();
+					String sfrf= sfr.substring(0,10);
+
 					Gson gson = new Gson();
 					String json = gson.toJson(p);
 			%>
 		    <tr data-toggle="modal" data-target="#exampleModal" class="open-Dialog" data-button="<%=json %>">
 		      <td><%= p.getNombre() %></td>
 		      <td><%= p.getDestino().getNombre() %></td>
-		      <td><%= p.getFechaSalida() %></td>
-		      <td><%= p.getFechaIngreso() %></td>
+		      <td><%= sfsf %></td>
+		      <td><%= sfrf %></td>
 		      <td><%= p.getCupo() %></td>
    		      <td><%= p.getEstado() %></td>
 		    </tr>
@@ -162,7 +169,7 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
       
    		<div align="right">
 			<a href="index.jsp" class="btn btn-secondary" role="button" aria-disabled="true">Volver</a>
-	    	<a href="Controlador?action=AddPaquete" class="btn btn-secondary" role="button" aria-disabled="true">Nueva Oferta</a>
+	    	<a href="Controlador?action=AddPaquete" class="btn btn-secondary" role="button" aria-disabled="true">Nuevo Paquete</a>
 	    </div>
 
 
@@ -191,11 +198,13 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 		{
 	    	
 	    	$(document).on("click", ".open-Dialog", function () {	    		
-	    		var id = $(this).attr('data-button').id;
-	    		alert(id);
+	    		//var id = $(this).attr('data-button').id;
+	    		//alert(id);
 	    		//console.log(var x = $(this).attr('data-button'));
 	    		//var obj = jQuery.parseJSON('{"id":3,"nombre":"Test","destino":{"id":12210,"nombre":"9 de Abril"},"fechaIngreso":"Feb 2, 2018 12:00:00 AM","fechaSalida":"Feb 2, 2018 12:00:00 AM","estado":"Activo","cupo":5,"precioPersona":2000.0,"servicios":[{"id":11,"nombre":"Bar"},{"id":21,"nombre":"Casino"}],"descripcion":"Test","foto":"http://10.1.5.15:8080/Webapp/uploads/Paquete-1730183718163334036-descarga.jpg","cantPersonas":2,"politicasDeCancelacion":"Test"}');
 	    		//alert(obj.id);
+	    		var obj = JSON.parse($(this).attr('data-button'));
+	    		alert(obj.id);
 	    		
 	    	});
 	    	

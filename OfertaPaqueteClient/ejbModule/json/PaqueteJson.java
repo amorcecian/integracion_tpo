@@ -12,7 +12,7 @@ public class PaqueteJson implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
-	private String ciudadDestino;
+	private int ciudadDestino;
 	private int cupo;
 	private int cantPersonas;
 	private AgenciaJsonQueue agencia;
@@ -23,8 +23,8 @@ public class PaqueteJson implements Serializable {
 	private float precio;
 	private String descripcion;
 	private String politicas;
-	private List<String> servicios;
-	private List<String> mediosDePago;
+	private String servicios;
+	private String mediosDePago;
 	
 	
 	public int getId() {
@@ -39,10 +39,10 @@ public class PaqueteJson implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getCiudadDestino() {
+	public int getCiudadDestino() {
 		return ciudadDestino;
 	}
-	public void setCiudadDestino(String ciudadDestino) {
+	public void setCiudadDestino(int ciudadDestino) {
 		this.ciudadDestino = ciudadDestino;
 	}
 	public int getCupo() {
@@ -105,20 +105,17 @@ public class PaqueteJson implements Serializable {
 	public void setPoliticas(String politicas) {
 		this.politicas = politicas;
 	}
-	public List<String> getServicios() {
+	public String getServicios() {
 		return servicios;
 	}
-	public void setServicios(List<String> servicios) {
+	public void setServicios(String servicios) {
 		this.servicios = servicios;
 	}
-	public List<String> getMediosDePago() {
+	public String getMediosDePago() {
 		return mediosDePago;
 	}
-	public void setMediosDePago(List<String> mediosDePago) {
+	public void setMediosDePago(String mediosDePago) {
 		this.mediosDePago = mediosDePago;
 	}
-
-	
-	
 
 }

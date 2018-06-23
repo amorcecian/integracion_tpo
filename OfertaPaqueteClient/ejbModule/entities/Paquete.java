@@ -37,7 +37,11 @@ public class Paquete implements Serializable{
 	
 	
 	private String descripcion;
+	
+	@Lob
+	@Column( length = 100000 )
 	private String foto;
+	
 	private int cantPersonas;
 	private String politicasDeCancelacion;
 	
