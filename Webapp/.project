@@ -3,6 +3,7 @@
 	<name>Webapp</name>
 	<comment></comment>
 	<projects>
+		<project>OfertaPaqueteClientClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

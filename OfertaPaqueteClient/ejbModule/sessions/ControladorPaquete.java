@@ -169,7 +169,7 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		String json = gson.toJson(pjson);
  		
  		queuePortal.sendMessage(json);
-  		backOffice.Loggear(8);
+  		//backOffice.Loggear(8);
   		
  		System.out.println("Paquete a encolar: " + json);
 
@@ -216,6 +216,11 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 			
 			pdto.setId(p.getId());
 			pdto.setNombre(p.getNombre());
+			
+			AgenciaDTO adto = new AgenciaDTO();
+			adto.setNombre(p.getAgencia().getNombre());
+			pdto.setAgencia(adto);
+			
 			DestinoDTO ddto = new DestinoDTO();
 			ddto.setId(p.getDestino().getId());
 			ddto.setNombre(p.getDestino().getNombre());
@@ -246,6 +251,17 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 			pdto.setFoto(p.getFoto());
 			pdto.setCantPersonas(p.getCantPersonas());
 			pdto.setPoliticasDeCancelacion(p.getPoliticasDeCancelacion());
+			
+			List <FormasDePagoDTO> lstFPDTO = new ArrayList<FormasDePagoDTO>();
+			List <FormasDePago> lstFP = p.getMediosDePago();
+			
+			for(FormasDePago FP : lstFP) {
+				FormasDePagoDTO fpdto = new FormasDePagoDTO();
+				fpdto.setId(FP.getId());
+				fpdto.setDescripcion(FP.getDescripcion());
+				lstFPDTO.add(fpdto);
+			}
+			pdto.setFormPagos(lstFPDTO);
 			
 			lstPDTO.add(pdto);			
 			

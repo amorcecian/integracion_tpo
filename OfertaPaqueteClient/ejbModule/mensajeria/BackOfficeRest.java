@@ -3,6 +3,7 @@ package mensajeria;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -75,7 +76,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		String sajson = gson.toJson(ajson);		
  		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(sajson));
 
-    	
+ 		
+ 		/*
+        //   INICIO PRODUCCION
 		URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/solicitudes");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
@@ -119,9 +122,10 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		
 		
 		Loggear(7);
-		
+		//   FIN PRODUCCION
+		*/
 	  	
-	  	/*
+	  	
 	  	//INICIO TEST
 		  	String idBackoffice = gson.fromJson(Funciones.altaAgencia(sajson), String.class);
 	 		System.out.println("Id del backoffice: " + idBackoffice );
@@ -132,7 +136,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 	  	
 	  	
 	  	//FIN TEST
-		*/
+		
 	
 	
 		} catch (Exception e) {			
@@ -146,7 +150,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		
   		try {
  	    	
-  	        
+
 			URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/logs");
   			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
   			urlConnection.setDoOutput(true);
@@ -203,6 +207,8 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 
   		try {	        
 			
+  			/*
+  			//   INICIO PRODUCCION
   			URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/servicios");
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
@@ -229,30 +235,24 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		 	}
 			br.close();
 			
-			//print result
-			System.out.println(Charset.forName("UTF-8").encode(response.toString()));
-	 		
+			//print result 		
 			System.out.println(response.toString());
   			Gson gson = new Gson();	
   			Type founderListType = new TypeToken<ArrayList<TipoServicio>>(){}.getType();
   			
   			listServicios = gson.fromJson(response.toString(), founderListType);
+  		
+  			//   FIN PRODUCCION
+  			*/
   			
   			
-  			/*
   			//INICIO TEST
   			Gson gson = new Gson();	
   			Type founderListType = new TypeToken<ArrayList<TipoServicio>>(){}.getType();
-  			listServicios = gson.fromJson(Funciones.obtenerServicios(), founderListType);
-  			/*
-			for(TipoServicio ts:listServicios){
-  				System.out.println("Tipo Servicio: " + ts.getNombre());
-  				for(Servicio s : ts.getServicios()) {
-  					System.out.println("Servicio: " + s.getNombre());
-  				}
-  			}
+  			//listServicios = gson.fromJson(Funciones.obtenerServicios(), founderListType);
+  			listServicios = gson.fromJson(new FileReader("c:\\servicios.txt"), founderListType);
   			//FIN TEST
-  			*/
+  			
 	 		
 	 		
 	 		for(TipoServicio ts: listServicios) {

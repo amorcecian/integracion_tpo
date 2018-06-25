@@ -5,7 +5,6 @@
 	<projects>
 		<project>OfertaPaqueteClient</project>
 		<project>OfertaPaqueteClientClient</project>
-		<project>Webapp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

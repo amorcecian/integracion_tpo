@@ -121,13 +121,13 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 					String sfs = p.getFechaSalida().toString();
 					String sfsf= sfs.substring(0,10);
 					
-					String sfr = p.getFechaSalida().toString();
+					String sfr = p.getFechaIngreso().toString();
 					String sfrf= sfr.substring(0,10);
 
 					Gson gson = new Gson();
 					String json = gson.toJson(p);
 			%>
-		    <tr data-toggle="modal" data-target="#exampleModal" class="open-Dialog" data-button="<%=json %>">
+		    <tr data-toggle="modal" data-target="#exampleModal" class="open-Dialog" data-button='<%=json %>'>
 		      <td><%= p.getNombre() %></td>
 		      <td><%= p.getDestino().getNombre() %></td>
 		      <td><%= sfsf %></td>
@@ -146,22 +146,43 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
       <!-- /.row -->
       
       <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+    
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Paquete</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
       <div class="modal-body">
-     	 <p>some content</p>
-        <input type="text" name="bookId" id="bookId" value=""/>
+      		<h5 class="modal-title" id="tituloModal" align="center"></h5>
+      		<br>
+     	 	<b>Agencia</b><p id="agencia"></p>
+     	 	<b>Destino</b><p id="destino"></p>
+     	 	<b>Fecha de Salida</b><p id="fechaSalida"></p>
+     	 	<b>Fecha de Regreso</b><p id="fechaRegreso"></p>
+     	 	<b>Cupo</b><p id="cupo"></p>
+     	 	<b>Cantidad de Personas</b><p id="cantidadPersonas"></p>
+     	 	<b>Descripción del paquete</b><p id="descripcion"></p>
+     	 	<b>Servicios</b><p id="servicios"></p>
+     	 	<b>Precio por persona</b><p id="precioPersona"></p>
+     	 	<b>Políticas de cancelación</b><p id="politicas"></p>
+     	 	<b>Medios de pago</b><p id="mediosPago"></p>
+     	 	<div align="center">
+     	 		<img id="imagen" class="img-thumbnail">
+     	 	</div>
+     	 	
+     	 	
+        
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      
     </div>
   </div>
 </div>
@@ -198,14 +219,33 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 		{
 	    	
 	    	$(document).on("click", ".open-Dialog", function () {	    		
-	    		//var id = $(this).attr('data-button').id;
-	    		//alert(id);
-	    		//console.log(var x = $(this).attr('data-button'));
-	    		//var obj = jQuery.parseJSON('{"id":3,"nombre":"Test","destino":{"id":12210,"nombre":"9 de Abril"},"fechaIngreso":"Feb 2, 2018 12:00:00 AM","fechaSalida":"Feb 2, 2018 12:00:00 AM","estado":"Activo","cupo":5,"precioPersona":2000.0,"servicios":[{"id":11,"nombre":"Bar"},{"id":21,"nombre":"Casino"}],"descripcion":"Test","foto":"http://10.1.5.15:8080/Webapp/uploads/Paquete-1730183718163334036-descarga.jpg","cantPersonas":2,"politicasDeCancelacion":"Test"}');
-	    		//alert(obj.id);
 	    		var obj = JSON.parse($(this).attr('data-button'));
-	    		alert(obj.id);
-	    		
+	    		$("#tituloModal").text("Nombre del paquete: " + obj.nombre);
+	    		$("#agencia").text(obj.agencia.Nombre);	
+				$("#destino").text(obj.destino.nombre);				
+	    		$("#fechaSalida").text(obj.fechaSalida.substring(0,12));	    		
+	    		$("#fechaRegreso").text(obj.fechaIngreso.substring(0,12));
+	    		$("#cupo").text(obj.cupo);
+	    		$("#cantidadPersonas").text(obj.cantPersonas);
+	    		$("#descripcion").text(obj.descripcion);
+
+	    		var serv = $.map(obj.servicios, function(v){
+	    		    return v.nombre;
+	    		}).join(', ');
+	    		$("#servicios").text(serv);
+
+	    		$("#precioPersona").text("$ " + obj.precioPersona);
+	    		$("#politicas").text(obj.politicasDeCancelacion);
+
+
+	    		var medios = $.map(obj.formPagos, function(v){
+	    		    return v.descripcion;
+	    		}).join(', ');
+	    		$("#mediosPago").text(medios);
+
+	    		var url = 'data:image/png;base64,' + obj.foto;
+	    		$("#imagen").attr("src",url);
+
 	    	});
 	    	
 	    	

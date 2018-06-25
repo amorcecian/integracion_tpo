@@ -164,8 +164,8 @@ public class Controlador extends HttpServlet {
 	    		
 	    		String agencia = request.getParameter("agencia");
 	            String nombre = request.getParameter("nombre");
-	            String fechaSalida = request.getParameter("fechaSalida");
-	            String fechaRegreso = request.getParameter("fechaRegreso");
+	            String fechaSalida = request.getParameter("from");
+	            String fechaRegreso = request.getParameter("to");
 	            
 	            String cupo = request.getParameter("cupo");
 	            String cantPersonas = request.getParameter("cantPersonas");

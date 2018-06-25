@@ -7,9 +7,5 @@
         <dependent-module archiveName="OfertaPaqueteClientClient.jar" deploy-path="/" handle="module:/resource/OfertaPaqueteClientClient/OfertaPaqueteClientClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Webapp.war" deploy-path="/" handle="module:/resource/Webapp/Webapp">
-            <dependent-object/>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
     </wb-module>
 </project-modules>

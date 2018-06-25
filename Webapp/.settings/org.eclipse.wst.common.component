@@ -2,6 +2,9 @@
     <wb-module deploy-name="Webapp">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="OfertaPaqueteClientClient.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/OfertaPaqueteClientClient/OfertaPaqueteClientClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Webapp"/>
         <property name="java-output-path" value="/Webapp/build/classes"/>
     </wb-module>

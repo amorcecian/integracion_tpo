@@ -20,7 +20,8 @@ public abstract class Funciones {
 		Servicio s3 = new Servicio(21, "Casino");
 		Servicio s4 = new Servicio(22, "Diarios y revistas");
 		Servicio s5 = new Servicio(31, "Aire acondicionado");
-		Servicio s6 = new Servicio(32, "Caja fuerte");
+		Servicio s6 = new Servicio(32, "Baño Turco");
+		Servicio s7 = new Servicio(32, "Mandarín");
 		
 		TipoServicio ts1 = new 	TipoServicio(1,"Comida y bebida");
 		ts1.getServicios().add(s1);
@@ -34,9 +35,13 @@ public abstract class Funciones {
 		ts3.getServicios().add(s5);
 		ts3.getServicios().add(s6);
 		
+		TipoServicio ts4 = new 	TipoServicio(4,"Idiomas");
+		ts4.getServicios().add(s7);
+		
 		lts.add(ts1);
 		lts.add(ts2);
 		lts.add(ts3);
+		lts.add(ts4);
 
 		Gson gson = new Gson();
 		

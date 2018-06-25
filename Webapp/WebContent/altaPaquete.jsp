@@ -24,6 +24,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 
     <!-- Bootstrap core CSS -->
 	<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	
     <!-- Custom styles for this template -->
 	<link href="css/modern-business.css" rel="stylesheet" type="text/css"/>
@@ -124,17 +125,19 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
       	
 		  <div class="form-group">
 		    <label for="formGroupExampleInput">Nombre</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre" required>
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre" name="nombre" required >
 		  </div>
 		  
-  		  <div class="form-group">
+
+   		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de salida</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaSalida" required>
+		   <input type="text" class="form-control readonly" id="from" name="from" required>
 		  </div>
+
 		  
    		  <div class="form-group">
 		    <label for="formGroupExampleInput">Fecha de regreso</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="dd/mm/aaaa" name="fechaRegreso" required>
+		    <input type="text" class="form-control readonly" id="to" name="to" required>
 		  </div>
 		  
    		  <div class="form-group">
@@ -264,9 +267,35 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/jqBootstrapValidation.js"></script>
-    
+		
+<script>
+$(function() {
+    $( "#from" ).datepicker({
+      defaultDate: "+1w",
+      dateFormat: 'dd/mm/yy',  
+      changeMonth: true,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      dateFormat: 'dd/mm/yy',
+      changeMonth: true,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+
+$(".readonly").on('keydown paste', function(e){
+    e.preventDefault();
+});
+</script>
+
 
   </body>
 
