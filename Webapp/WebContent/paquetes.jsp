@@ -118,10 +118,10 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
   			<%
 			if(paquetes != null ){	
 				for (PaqueteDTO p : paquetes) {
-					String sfs = p.getFechaSalida().toString();
+					String sfs = p.getDesde().toString();
 					String sfsf= sfs.substring(0,10);
 					
-					String sfr = p.getFechaIngreso().toString();
+					String sfr = p.getHasta().toString();
 					String sfrf= sfr.substring(0,10);
 
 					Gson gson = new Gson();
@@ -223,8 +223,8 @@ List<PaqueteDTO> paquetes = (List<PaqueteDTO>) request.getAttribute("paquetes");
 	    		$("#tituloModal").text("Nombre del paquete: " + obj.nombre);
 	    		$("#agencia").text(obj.agencia.Nombre);	
 				$("#destino").text(obj.destino.nombre);				
-	    		$("#fechaSalida").text(obj.fechaSalida.substring(0,12));	    		
-	    		$("#fechaRegreso").text(obj.fechaIngreso.substring(0,12));
+	    		$("#fechaSalida").text(obj.desde.substring(0,12));	    		
+	    		$("#fechaRegreso").text(obj.hasta.substring(0,12));
 	    		$("#cupo").text(obj.cupo);
 	    		$("#cantidadPersonas").text(obj.cantPersonas);
 	    		$("#descripcion").text(obj.descripcion);

@@ -4,8 +4,7 @@
 <%@page import="dto.ServicioDTO"%>
 <%@page import="dto.TipoServicioDTO"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 List<AgenciaDTO> Agencias = (List<AgenciaDTO>) request.getAttribute("Agencias");
 List<TipoServicioDTO> TipoServicios = (List<TipoServicioDTO>) request.getAttribute("TipoServicios");
@@ -64,7 +63,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
           <div class="carousel-item active" style="background-image: url('images/londres.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Londres</h3>
-              <p>Europa Cl·sica</p>
+              <p>Europa Cl√°sica</p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
@@ -168,7 +167,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
 		  	
 	  	  <div class="form-group">
-		    <label for="exampleFormControlTextarea1">DescripciÛn</label>
+		    <label for="exampleFormControlTextarea1">Descripci√≥n</label>
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" required></textarea>
 		  </div>
 		  
@@ -227,7 +226,7 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		  	
 		  	
 	  	  <div class="form-group">
-		    <label for="exampleFormControlTextarea1">PolÌticas de cancelaciÛn</label>
+		    <label for="exampleFormControlTextarea1">Pol√≠ticas de cancelaci√≥n</label>
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="politicas" required></textarea>
 		  </div>
 
@@ -273,14 +272,22 @@ List<FormasDePagoDTO> FormasdePago = (List<FormasDePagoDTO>) request.getAttribut
 		
 <script>
 $(function() {
+	var dateToday = new Date(); 
+	var dtMax = new Date();
+    dtMax.setDate(dtMax.getDate() + 1);
+		
+ 	var daysToAdd = 4;		
     $( "#from" ).datepicker({
       defaultDate: "+1w",
       dateFormat: 'dd/mm/yy',  
       changeMonth: true,
+      minDate: dtMax ,
       onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
+        $("#to").datepicker( "option", "minDate", selectedDate );
+      }    	    
     });
+
+    
     $( "#to" ).datepicker({
       defaultDate: "+1w",
       dateFormat: 'dd/mm/yy',

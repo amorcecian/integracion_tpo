@@ -12,8 +12,8 @@ public class PaqueteDTO implements Serializable {
 	private int id;
 	private String nombre;
 	private DestinoDTO destino;
-	private Date fechaIngreso;
-	private Date fechaSalida;
+	private Date desde;
+	private Date hasta;
 	private String estado;
 	private int cupo;
 	private float precioPersona;
@@ -45,17 +45,17 @@ public class PaqueteDTO implements Serializable {
 	public void setDestino(DestinoDTO destino) {
 		this.destino = destino;
 	}
-	public Date getFechaIngreso() {
-		return fechaIngreso;
+	public Date getDesde() {
+		return desde;
 	}
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
+	public void setDesde(Date desde) {
+		this.desde = desde;
 	}
-	public Date getFechaSalida() {
-		return fechaSalida;
+	public Date getHasta() {
+		return hasta;
 	}
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
 	}
 	public String getEstado() {
 		return estado;
@@ -118,14 +118,6 @@ public class PaqueteDTO implements Serializable {
 	public void setFormPagos(List<FormasDePagoDTO> formPagos) {
 		this.formPagos = formPagos;
 	}
-	@Override
-	public String toString() {
-		return "PaqueteDTO [nombre=" + nombre + ", destino=" + destino + ", fechaIngreso=" + fechaIngreso
-				+ ", fechaSalida=" + fechaSalida + ", estado=" + estado + ", cupo=" + cupo + ", precioPersona="
-				+ precioPersona + ", servicios=" + servicios + ", descripcion=" + descripcion + ", foto=" + foto
-				+ ", cantPersonas=" + cantPersonas + ", politicasDeCancelacion=" + politicasDeCancelacion + ", agencia="
-				+ agencia + "]";
-	}
-	
+
 
 }

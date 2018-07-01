@@ -76,8 +76,8 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
     	
     	
     	//Convierto Fecha al fomato correcto AAAA-MM-DD
-    	p.setFechaIngreso(pdto.getFechaIngreso());
-    	p.setFechaSalida(pdto.getFechaSalida());
+    	p.setDesde(pdto.getDesde());
+    	p.setHasta(pdto.getHasta());
     	
     	p.setEstado(pdto.getEstado());
     	p.setCupo(pdto.getCupo());
@@ -144,8 +144,8 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		
 		
 		
-		String sfd = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault()).format(p.getFechaIngreso().toInstant());
-		String sfh = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault()).format(p.getFechaSalida().toInstant());
+		String sfd = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault()).format(p.getDesde().toInstant());
+		String sfh = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault()).format(p.getHasta().toInstant());
 
 		pjson.setFechaDesde(sfd);		
 		pjson.setFechaHasta(sfh);
@@ -169,7 +169,7 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 		String json = gson.toJson(pjson);
  		
  		queuePortal.sendMessage(json);
-  		//backOffice.Loggear(8);
+  		backOffice.Loggear(8);
   		
  		System.out.println("Paquete a encolar: " + json);
 
@@ -228,8 +228,8 @@ public class ControladorPaquete implements ControladorPaqueteRemote {
 						
 			pdto.setDestino(ddto);
 			
-			pdto.setFechaIngreso(p.getFechaIngreso());
-			pdto.setFechaSalida(p.getFechaSalida());
+			pdto.setDesde(p.getDesde());
+			pdto.setHasta(p.getHasta());
 			pdto.setEstado(p.getEstado());
 			
 			pdto.setCupo(p.getCupo());

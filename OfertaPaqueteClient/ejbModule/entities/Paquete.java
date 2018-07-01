@@ -23,8 +23,8 @@ public class Paquete implements Serializable{
 	@JoinColumn(name="destino")
 	private Destino destino;
 	
-	private Date fechaIngreso;
-	private Date fechaSalida;
+	private Date desde;
+	private Date hasta;
 	private String estado;
 	private int cupo;
 	private Float precioPersona;
@@ -87,23 +87,23 @@ public class Paquete implements Serializable{
 	}
 
 
-	public Date getFechaIngreso() {
-		return fechaIngreso;
+	public Date getDesde() {
+		return desde;
 	}
 
 
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
+	public void setDesde(Date desde) {
+		this.desde = desde;
 	}
 
 
-	public Date getFechaSalida() {
-		return fechaSalida;
+	public Date getHasta() {
+		return hasta;
 	}
 
 
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
 	}
 
 

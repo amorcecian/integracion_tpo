@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,9 +78,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
  		System.out.println("Imprimo el JSON de la Agencia: "+gson.toJson(sajson));
 
  		
- 		/*
+ 		
         //   INICIO PRODUCCION
-		URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/solicitudes");
+		URL url = new URL("http://192.168.130.103:8080/BackOffice/REST/solicitudes");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("PUT");
@@ -123,9 +124,9 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		
 		Loggear(7);
 		//   FIN PRODUCCION
-		*/
+		
 	  	
-	  	
+	  	/*
 	  	//INICIO TEST
 		  	String idBackoffice = gson.fromJson(Funciones.altaAgencia(sajson), String.class);
 	 		System.out.println("Id del backoffice: " + idBackoffice );
@@ -136,6 +137,8 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 	  	
 	  	
 	  	//FIN TEST
+	  	 * 
+	  	 */
 		
 	
 	
@@ -151,7 +154,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   		try {
  	    	
 
-			URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/logs");
+			URL url = new URL("http://192.168.130.103:8080/BackOffice/REST/logs");
   			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
   			urlConnection.setDoOutput(true);
   			urlConnection.setRequestMethod("PUT");
@@ -207,13 +210,15 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 
   		try {	        
 			
-  			/*
+  			
   			//   INICIO PRODUCCION
-  			URL url = new URL("http://192.168.130.104:8080/IA_TPO_BO_G05_DWS/REST/servicios");
+  			URL url = new URL("http://192.168.130.103:8080/BackOffice/REST/servicios");
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("GET");
 		  	urlConnection.setRequestProperty("Content-Type","application/json");
+		  	urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
+
 		  	
 		 	int codResponse = urlConnection.getResponseCode();
 		 	
@@ -223,7 +228,7 @@ public class BackOfficeRest implements BackOfficeRestRemote {
 		  	}	  	
 
 		 	
-		 	BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		 	BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(),StandardCharsets.UTF_8));
 		 	String inputLine;
 		 	StringBuffer response = new StringBuffer();
 		 	
@@ -240,19 +245,19 @@ public class BackOfficeRest implements BackOfficeRestRemote {
   			Gson gson = new Gson();	
   			Type founderListType = new TypeToken<ArrayList<TipoServicio>>(){}.getType();
   			
-  			listServicios = gson.fromJson(response.toString(), founderListType);
-  		
+  			listServicios = gson.fromJson(response.toString(), founderListType);  		
   			//   FIN PRODUCCION
-  			*/
   			
   			
+  			
+  			/*
   			//INICIO TEST
   			Gson gson = new Gson();	
   			Type founderListType = new TypeToken<ArrayList<TipoServicio>>(){}.getType();
   			//listServicios = gson.fromJson(Funciones.obtenerServicios(), founderListType);
   			listServicios = gson.fromJson(new FileReader("c:\\servicios.txt"), founderListType);
   			//FIN TEST
-  			
+  			*/
 	 		
 	 		
 	 		for(TipoServicio ts: listServicios) {

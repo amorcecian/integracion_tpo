@@ -164,8 +164,8 @@ public class Controlador extends HttpServlet {
 	    		
 	    		String agencia = request.getParameter("agencia");
 	            String nombre = request.getParameter("nombre");
-	            String fechaSalida = request.getParameter("from");
-	            String fechaRegreso = request.getParameter("to");
+	            String desde = request.getParameter("from");
+	            String hasta = request.getParameter("to");
 	            
 	            String cupo = request.getParameter("cupo");
 	            String cantPersonas = request.getParameter("cantPersonas");
@@ -209,11 +209,11 @@ public class Controlador extends HttpServlet {
 									
 
 					DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-					Date date1 = (Date) sourceFormat.parse(fechaRegreso);					
-					pdto.setFechaIngreso(date1);
+					Date date1 = (Date) sourceFormat.parse(desde);					
+					pdto.setDesde(date1);
 					
-					Date date2 = (Date) sourceFormat.parse(fechaSalida);
-					pdto.setFechaSalida(date2);
+					Date date2 = (Date) sourceFormat.parse(hasta);
+					pdto.setHasta(date2);
 					
 					pdto.setEstado(estado);
 					
